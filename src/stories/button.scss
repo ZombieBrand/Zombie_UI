@@ -1,0 +1,47 @@
+@import './styles/index.scss';
+button:focus {
+  outline: none;
+}
+.zombie-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: $btn-box-shadow;
+  line-height: 1;
+}
+.zombie-button--primary {
+  @include button-style($primary, $primary, $white);
+}
+.zombie-button--success{
+  @include button-style($success, $success, $white);
+}
+.zombie-button--info {
+  @include button-style($info, $info, $white);
+}
+.zombie-button--warning{
+  @include button-style($warning, $warning, $white);
+}
+.zombie-button--danger{
+  @include button-style($danger, $danger, $white);
+}
+.zombie-button--secondary {
+  color: #333;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 0 1px inset;
+}
+.zombie-button--small {
+  font-size: 12px;
+  padding: 10px 16px;
+}
+.zombie-button--medium {
+  font-size: 14px;
+  padding: 11px 20px;
+}
+.zombie-button--large {
+  font-size: 16px;
+  padding: 12px 24px;
+}
+

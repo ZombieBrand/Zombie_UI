@@ -1190,6 +1190,14 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@icon-park/vue@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@icon-park/vue/-/vue-1.3.1.tgz#23a2eb936ba14a6c0f970cd50e451111abed8dbd"
+  integrity sha512-b0o6HnFvyYcIUc4f0jHVZt9LTL4SiXJFbtDPdqQtGTubYAix/ax309GbrloEwp+16ki6fDsscYKro7P6P6Hpbw==
+  dependencies:
+    "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
+    csstype "^3.0.3"
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.npmjs.org/@icons/material/-/material-0.2.4.tgz"
@@ -1941,6 +1949,11 @@
   dependencies:
     core-js "^3.0.1"
 
+"@storybook/preset-scss@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@storybook/preset-scss/-/preset-scss-1.0.3.tgz#8ac834545c642dada0f64f510ef08dfb882e9737"
+  integrity sha512-o9Iz6wxPeNENrQa2mKlsDKynBfqU2uWaRP80HeWp4TkGgf7/x3DVF2O7yi9N0x/PI1qzzTTpxlQ90D62XmpiTw==
+
 "@storybook/router@6.1.21":
   version "6.1.21"
   resolved "https://registry.npmjs.org/@storybook/router/-/router-6.1.21.tgz"
@@ -2485,7 +2498,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
+"@vue/babel-helper-vue-jsx-merge-props@^1.0.0", "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npm.taobao.org/@vue/babel-helper-vue-jsx-merge-props/download/@vue/babel-helper-vue-jsx-merge-props-1.2.1.tgz"
   integrity sha1-MWJKelBfsU2h1YAjclpMXycOaoE=
@@ -5386,7 +5399,7 @@ csstype@^2.5.7:
   resolved "https://registry.npmjs.org/csstype/-/csstype-2.6.16.tgz"
   integrity sha512-61FBWoDHp/gRtsoDkq/B1nWrCUG/ok1E3tUrcNbZjsE9Cxd9yzUirjS3+nAATB8U4cTtaQmAHbNndoFz5L6C9Q==
 
-csstype@^3.0.2:
+csstype@^3.0.2, csstype@^3.0.3:
   version "3.0.7"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.0.7.tgz"
   integrity sha512-KxnUB0ZMlnUWCsx2Z8MUsr6qV6ja1w9ArPErJaJaF8a5SOWoHLIszeCTKGRGRgtLgYrs1E8CHkNSP1VZTTPc9g==

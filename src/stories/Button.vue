@@ -1,23 +1,20 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">
+  <button v-waves type="button" :class="classes" @click="onClick">
     {{ label }}
+    <slot></slot>
   </button>
 </template>
 
 <script>
-import "./button.css";
-
+import "./button.scss";
+import Waves from "../directives/waves";
 export default {
-  name: "my-button",
-
+  name: "ZButton",
+  directives: { Waves },
   props: {
     label: {
       type: String,
       required: true,
-    },
-    primary: {
-      type: Boolean,
-      default: false,
     },
     size: {
       type: String,
@@ -26,23 +23,25 @@ export default {
         return ["small", "medium", "large"].indexOf(value) !== -1;
       },
     },
-    backgroundColor: {
-      type: String,
+    type: {
+      type: [Boolean, String],
+      default: false,
+      validator: function (value) {
+        return (
+          ["primary", "success", "info", "warning", "danger", false].indexOf(
+            value
+          ) !== -1
+        );
+      },
     },
   },
-
   computed: {
     classes() {
       return {
-        "storybook-button": true,
-        "storybook-button--primary": this.primary,
-        "storybook-button--secondary": !this.primary,
-        [`storybook-button--${this.size}`]: true,
-      };
-    },
-    style() {
-      return {
-        backgroundColor: this.backgroundColor,
+        "zombie-button": true,
+        [`zombie-button--${this.type}`]: this.type,
+        "zombie-button--secondary": !this.type,
+        [`zombie-button--${this.size}`]: true,
       };
     },
   },
