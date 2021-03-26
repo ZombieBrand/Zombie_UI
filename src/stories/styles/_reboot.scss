@@ -209,8 +209,13 @@ sup {
   vertical-align: baseline;
 }
 
-sub { bottom: -.25em; }
-sup { top: -.5em; }
+sub {
+  bottom: -.25em;
+}
+
+sup {
+  top: -.5em;
+}
 
 
 // Links
@@ -303,8 +308,6 @@ svg {
   overflow: hidden; // 1
   vertical-align: middle;
 }
-
-
 // Tables
 
 // Prevent double borders
@@ -445,7 +448,7 @@ input[type="month"] {
 
 textarea {
   overflow: auto; // 1
-  resize: vertical;  // 2
+  resize: vertical; // 2
 }
 
 // 1. Browsers set a default `min-width: min-content;` on fieldsets,
@@ -457,7 +460,7 @@ textarea {
 
 fieldset {
   min-width: 0; // 1
-  padding: 0;  // 2
+  padding: 0; // 2
   margin: 0; // 2
   border: 0; // 2
 }

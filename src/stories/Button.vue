@@ -1,21 +1,33 @@
 <template>
-  <button v-waves type="button" :class="classes" @click="onClick">
-    {{ label }}
+  <button v-waves type="button" :class="classes" @click="!disabled && onClick">
+    {{ !circle ? label : "" }}
     <slot></slot>
+    <z-icon class="loading" name="loading"></z-icon
+    ><span style="font-size: 1em">加载中</span>
   </button>
 </template>
 
 <script>
 import "./button.scss";
 import Waves from "../directives/waves";
+import Icon from "./Icon";
 export default {
   name: "ZButton",
   directives: { Waves },
+  components: {
+    ZIcon: Icon,
+  },
   props: {
+    /**
+     * 按钮的显示内容
+     */
     label: {
       type: String,
-      required: true,
+      default: "",
     },
+    /**
+     * 尺寸
+     */
     size: {
       type: String,
       default: "medium",
@@ -23,6 +35,9 @@ export default {
         return ["small", "medium", "large"].indexOf(value) !== -1;
       },
     },
+    /**
+     * 类型
+     */
     type: {
       type: [Boolean, String],
       default: false,
@@ -34,6 +49,36 @@ export default {
         );
       },
     },
+    /**
+     * 是否圆角按钮
+     */
+    round: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 是否圆形按钮
+     *
+     * 开启后不显示label,请使用插槽显示内容
+     */
+    circle: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 是否禁用状态
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 是否加载中状态
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classes() {
@@ -42,6 +87,9 @@ export default {
         [`zombie-button--${this.type}`]: this.type,
         "zombie-button--secondary": !this.type,
         [`zombie-button--${this.size}`]: true,
+        "zombie-button--round": this.round,
+        "zombie-button--circle": this.circle,
+        disabled: this.disabled,
       };
     },
   },

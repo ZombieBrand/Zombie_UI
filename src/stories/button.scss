@@ -1,47 +1,151 @@
 @import './styles/index.scss';
+
 button:focus {
   outline: none;
 }
+
 .zombie-button {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  border: 0;
-  border-radius: 3em;
-  cursor: pointer;
+  font-size: $font-size-base;
+  position: relative;
   display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  color: $body-color;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background-image: none;
+  border: $btn-border-width solid transparent;
+  margin-right:4px ;
+  @include button-size(
+                  $btn-padding-y,
+                  $btn-padding-x,
+                  $btn-font-size,
+                  $border-radius
+  );
   box-shadow: $btn-box-shadow;
-  line-height: 1;
-}
-.zombie-button--primary {
-  @include button-style($primary, $primary, $white);
-}
-.zombie-button--success{
-  @include button-style($success, $success, $white);
-}
-.zombie-button--info {
-  @include button-style($info, $info, $white);
-}
-.zombie-button--warning{
-  @include button-style($warning, $warning, $white);
-}
-.zombie-button--danger{
-  @include button-style($danger, $danger, $white);
-}
-.zombie-button--secondary {
-  color: #333;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 0 0 1px inset;
-}
-.zombie-button--small {
-  font-size: 12px;
-  padding: 10px 16px;
-}
-.zombie-button--medium {
-  font-size: 14px;
-  padding: 11px 20px;
-}
-.zombie-button--large {
-  font-size: 16px;
-  padding: 12px 24px;
+  cursor: pointer;
+  transition: $btn-transition;
+
+  &.zombie-button--primary {
+    @include button-style($primary, $primary, $white);
+
+    &:hover {
+      box-shadow: inset 0 0 0 3px $primary;
+    }
+  }
+
+  &.zombie-button--success {
+    @include button-style($success, $success, $white);
+
+    &:hover {
+      box-shadow: inset 0 0 0 3px $success;
+    }
+  }
+
+  &.zombie-button--info {
+    @include button-style($info, $info, $white);
+
+    &:hover {
+      box-shadow: inset 0 0 0 3px $info;
+    }
+  }
+
+  &.zombie-button--warning {
+    @include button-style($warning, $warning, $white);
+
+    &:hover {
+      box-shadow: inset 0 0 0 3px $warning;
+    }
+  }
+
+  &.zombie-button--danger {
+    @include button-style($danger, $danger, $white);
+
+    &:hover {
+      box-shadow: inset 0 0 0 3px $danger;
+    }
+  }
+
+  &.zombie-button--secondary {
+    color: #333;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 0 1px inset;
+    &:hover {
+      box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.zombie-button--small {
+    @include button-size(
+                    $btn-padding-y-sm,
+                    $btn-padding-x-sm,
+                    $btn-font-size-sm,
+                    0
+    );
+    &.zombie-button--round {
+      @include button-size(
+                      $btn-padding-y-sm,
+                      $btn-padding-x-sm,
+                      $btn-font-size-sm,
+                      $btn-border-radius-sm
+      )
+    }
+  }
+
+  &.zombie-button--medium {
+    @include button-size(
+                    $btn-padding-y-md,
+                    $btn-padding-x-md,
+                    $btn-font-size-md,
+                    0
+    );
+    &.zombie-button--round {
+      @include button-size(
+                      $btn-padding-y-md,
+                      $btn-padding-x-md,
+                      $btn-font-size-md,
+                      $btn-border-radius
+      )
+    }
+  }
+
+  &.zombie-button--large {
+    @include button-size(
+                    $btn-padding-y-lg,
+                    $btn-padding-x-lg,
+                    $btn-font-size-lg,
+                    0
+    );
+    &.zombie-button--round {
+      @include button-size(
+                      $btn-padding-y-lg,
+                      $btn-padding-x-lg,
+                      $btn-font-size-lg,
+                      $btn-border-radius-lg
+      )
+    }
+  }
+
+
+  &.zombie-button--circle {
+    border-radius: 50%;
+    line-height: 1;
+    padding: 11px
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: $btn-disabled-opacity;
+    box-shadow: none;
+
+    > * {
+      pointer-events: none;
+    }
+    &:hover{
+      box-shadow: none
+    }
+  }
 }
 
