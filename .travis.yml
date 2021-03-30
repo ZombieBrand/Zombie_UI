@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "14.16.0"
+script:
+  - yarn build
+  - yarn build-storybook
 addons:
   chrome: stable
 sudo: required
