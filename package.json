@@ -1,7 +1,9 @@
 {
-  "name": "zombie_ui",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-zombie-ui",
+  "version": "0.1.1",
+  "description": "ZombieBrand的UI框架",
+  "main": "dist/index.js",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

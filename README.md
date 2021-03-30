@@ -1,5 +1,5 @@
-# zombie_ui
-
+# vue-zombie-ui
+npm i vue-zombie-ui
 ## Project setup
 ```
 yarn install
