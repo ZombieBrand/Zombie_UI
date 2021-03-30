@@ -7,7 +7,12 @@
 import "./assets/iconfont.js";
 export default {
   name: "ZombieIcon",
-  props: ["name"],
+  props: {
+    name: {
+      type: String,
+      default: "loading",
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 @import './styles/index.scss';
 
 button:focus {
-  outline: none;
+  outline: none !important;
 }
 
 .zombie-button {
@@ -139,13 +139,16 @@ button:focus {
     cursor: not-allowed;
     opacity: $btn-disabled-opacity;
     box-shadow: none;
-
+    border: 1px solid rgba(0,0,0,0.2);
     > * {
       pointer-events: none;
     }
     &:hover{
       box-shadow: none
     }
+  }
+  .loading-description{
+    font-size:1em;
   }
 }
 

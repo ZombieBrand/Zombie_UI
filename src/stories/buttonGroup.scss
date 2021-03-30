@@ -1,0 +1,28 @@
+@import './styles/index.scss';
+
+@mixin child-button($radius) {
+  margin-right: 0;
+  border-radius: 0;
+  &:not(:first-child) {
+    margin-left: -3px;
+  }
+  &:first-child {
+    @include border-left-radius($radius);
+  }
+  &:last-child {
+    @include border-right-radius($radius);
+  }
+}
+
+.zombie-button-group {
+  display: inline-flex;
+  vertical-align: middle;
+
+  > .zombie-button {
+    @include child-button(0);
+
+    &.zombie-button--round {
+      @include child-button($border-radius)
+    }
+  }
+}

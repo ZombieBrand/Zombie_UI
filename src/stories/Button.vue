@@ -1,9 +1,14 @@
 <template>
-  <button v-waves type="button" :class="classes" @click="!disabled && onClick">
-    {{ !circle ? label : "" }}
-    <slot></slot>
-    <z-icon class="loading" name="loading"></z-icon
-    ><span style="font-size: 1em">加载中</span>
+  <button
+    v-waves
+    type="button"
+    :class="classes"
+    @click="!disabled && !loading && onClick"
+  >
+    <z-icon v-if="loading" class="loading" name="loading"></z-icon>
+    <span v-if="loading" class="loading-description">加载中</span>
+    {{ !circle && !loading ? label : "" }}
+    <slot v-if="!loading"></slot>
   </button>
 </template>
 
@@ -87,13 +92,12 @@ export default {
         [`zombie-button--${this.type}`]: this.type,
         "zombie-button--secondary": !this.type,
         [`zombie-button--${this.size}`]: true,
-        "zombie-button--round": this.round,
+        "zombie-button--round": this.round && !this.circle,
         "zombie-button--circle": this.circle,
-        disabled: this.disabled,
+        disabled: this.disabled || this.loading,
       };
     },
   },
-
   methods: {
     onClick() {
       this.$emit("onClick");
@@ -101,3 +105,6 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "./button.scss";
+</style>
