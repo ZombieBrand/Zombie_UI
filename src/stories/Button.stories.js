@@ -14,7 +14,6 @@ export default {
   argTypes: {
     type: {
       control: {
-        description: "描述",
         type: "select",
         options: ["primary", "success", "info", "warning", "danger", false],
       },

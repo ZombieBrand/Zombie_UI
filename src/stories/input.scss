@@ -1,12 +1,20 @@
 @import './styles/index.scss';
+
+@mixin input-error {
+  color: $pink;
+  border-color: $pink;
+  outline: 0;
+  box-shadow: 0 0 0 $input-focus-width $pink;
+}
 .zombie-input-wrapper {
   display: flex;
   width: 100%;
   margin-bottom: 30px;
   position: relative;
+
   .icon-wrapper {
     position: absolute;
-    height: 100%;
+    height: 60%;
     width: 35px;
     justify-content: center;
     color: $input-color;
@@ -14,14 +22,28 @@
     top: 0;
     display: flex;
     align-items: center;
+
     svg {
       color: $input-placeholder-color;
     }
   }
+  .error-icon {
+    fill: $pink;
+    font-size:1.5em;
+  }
+  .success-icon{
+    fill: $success;
+    font-size:1.5em;
+  }
+  .error-message {
+    color: $pink
+  }
 }
-.icon-wrapper+.zombie-input-inner {
+
+.icon-wrapper + .zombie-input-inner {
   padding-right: 35px;
 }
+
 .zombie-input-inner {
   width: 100%;
   padding: $input-padding-y $input-padding-x;
@@ -40,6 +62,14 @@
   box-shadow: $input-box-shadow;
   transition: $input-transition;
 
+  &.error {
+    @include input-error;
+
+    &:focus {
+      @include input-error;
+      // Avoid using mixin so we can pass custom focus shadow properly
+    }
+  }
   &:focus {
     color: $input-focus-color;
     background-color: $input-focus-bg;
@@ -48,19 +78,23 @@
     box-shadow: $input-focus-box-shadow;
     // Avoid using mixin so we can pass custom focus shadow properly
   }
+
   &::placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
+
   &:disabled,
   &[readonly] {
     background-color: $input-disabled-bg;
     border-color: $input-disabled-border-color;
     // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;
+    cursor: not-allowed;
   }
 }
+
 .zombie-input-group-prepend,
 .zombie-input-group-append {
   display: flex;
@@ -77,10 +111,12 @@
   border: $input-border-width solid $input-group-addon-border-color;
   border-radius: $input-border-radius;
 }
+
 .zombie-input-group-append + .btn {
   padding: 0;
   border: 0;
 }
+
 .input-group > .zombie-input-group-prepend,
 .input-group.input-group-append > .zombie-input-inner {
   @include border-right-radius(0);
@@ -91,13 +127,19 @@
   @include border-left-radius(0);
 }
 
-.input-size-sm .zombie-input-inner {
+.input-size-small .zombie-input-inner {
   padding: $input-padding-y-sm $input-padding-x-sm;
   font-size: $input-font-size-sm;
   border-radius: $input-border-radius-sm;
 }
 
-.input-size-lg .zombie-input-inner {
+.input-size-medium .zombie-input-inner {
+  padding: $input-padding-y-md $input-padding-x-md;
+  font-size: $input-font-size-md;
+  border-radius: $input-border-radius-md;
+}
+
+.input-size-large .zombie-input-inner {
   padding: $input-padding-y-lg $input-padding-x-lg;
   font-size: $input-font-size-lg;
   border-radius: $input-border-radius-lg;

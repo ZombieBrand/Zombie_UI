@@ -169,6 +169,7 @@ $border-color:                $gray-300 !default;
 $border-radius:               .55rem !default;
 $border-radius-lg:            .7rem !default;
 $border-radius-sm:            .4rem !default;
+$border-radius-md:            .5rem !default;
 
 // 不同类型的 box shadow
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
@@ -247,6 +248,10 @@ $input-padding-y-sm:                    $btn-padding-y-sm !default;
 $input-padding-x-sm:                    $btn-padding-x-sm !default;
 $input-font-size-sm:                    $btn-font-size-sm !default;
 
+$input-padding-y-md:                    $btn-padding-y-md !default;
+$input-padding-x-md:                    $btn-padding-x-md !default;
+$input-font-size-md:                    $btn-font-size-md !default;
+
 $input-padding-y-lg:                    $btn-padding-y-lg !default;
 $input-padding-x-lg:                    $btn-padding-x-lg !default;
 $input-font-size-lg:                    $btn-font-size-lg !default;
@@ -263,6 +268,7 @@ $input-box-shadow:                      $box-shadow-inset !default;
 $input-border-radius:                   $border-radius !default;
 $input-border-radius-lg:                $border-radius-lg !default;
 $input-border-radius-sm:                $border-radius-sm !default;
+$input-border-radius-md:                $border-radius-md !default;
 
 $input-focus-bg:                        $input-bg !default;
 $input-focus-border-color:              lighten($primary, 25%) !default;

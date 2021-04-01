@@ -21,10 +21,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { ZInput, Home },
-  template: "<z-input></z-input>",
+  template: "<z-input v-bind='$props'></z-input>",
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  size: "medium",
-};
