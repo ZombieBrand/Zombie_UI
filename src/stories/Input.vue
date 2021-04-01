@@ -32,5 +32,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./Input.scss";
+@import "./input.scss";
 </style>
