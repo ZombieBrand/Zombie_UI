@@ -21,6 +21,10 @@
         :value="value"
         :readonly="readonly"
         :placeholder="placeholder"
+        @change="onChange"
+        @input="onInput"
+        @focus="onFocus"
+        @blur="onBlur"
       />
       <template v-if="status === 'error'">
         <span class="error-message">{{ errorMessage }}</span>
@@ -78,7 +82,7 @@ export default {
      */
     status: {
       type: String,
-      default: "error",
+      default: "",
     },
     /**
      * 错误提示信息
@@ -98,8 +102,23 @@ export default {
     },
     inputState() {
       return {
-        error: true,
+        error: this.status === "error",
+        success: this.status === "success",
       };
+    },
+  },
+  methods: {
+    onChange($event) {
+      this.$emit("change", $event.target.value);
+    },
+    onInput($event) {
+      this.$emit("input", $event.target.value);
+    },
+    onFocus($event) {
+      this.$emit("focus", $event.target.value);
+    },
+    onBlur($event) {
+      this.$emit("blur", $event.target.value);
     },
   },
 };

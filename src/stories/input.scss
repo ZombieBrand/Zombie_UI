@@ -1,10 +1,16 @@
-@import './styles/index.scss';
+@import "./styles/index.scss";
 
 @mixin input-error {
-  color: $pink;
-  border-color: $pink;
+  color: $danger;
+  border-color: $danger;
   outline: 0;
-  box-shadow: 0 0 0 $input-focus-width $pink;
+  box-shadow: 0 0 0 $input-focus-width $danger;
+}
+@mixin input-success {
+  color: $success;
+  border-color: $success;
+  outline: 0;
+  box-shadow: 0 0 0 $input-focus-width $success;
 }
 .zombie-input-wrapper {
   display: flex;
@@ -28,15 +34,15 @@
     }
   }
   .error-icon {
-    fill: $pink;
-    font-size:1.5em;
+    fill: $danger;
+    font-size: 1.5em;
   }
-  .success-icon{
+  .success-icon {
     fill: $success;
-    font-size:1.5em;
+    font-size: 1.5em;
   }
   .error-message {
-    color: $pink
+    color: $danger;
   }
 }
 
@@ -70,6 +76,14 @@
       // Avoid using mixin so we can pass custom focus shadow properly
     }
   }
+  &.success {
+    @include input-success;
+
+    &:focus {
+      @include input-success;
+      // Avoid using mixin so we can pass custom focus shadow properly
+    }
+  }
   &:focus {
     color: $input-focus-color;
     background-color: $input-focus-bg;
@@ -92,6 +106,9 @@
     // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;
     cursor: not-allowed;
+  }
+  &:disabled {
+    opacity: 0.8;
   }
 }
 
