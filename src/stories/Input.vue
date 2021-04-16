@@ -109,16 +109,16 @@ export default {
   },
   methods: {
     onChange($event) {
-      this.$emit("change", $event.target.value);
+      this.$emit("onChange", $event.target.value);
     },
     onInput($event) {
-      this.$emit("input", $event.target.value);
+      this.$emit("onInput", $event.target.value);
     },
     onFocus($event) {
-      this.$emit("focus", $event.target.value);
+      this.$emit("onFocus", $event.target.value);
     },
     onBlur($event) {
-      this.$emit("blur", $event.target.value);
+      this.$emit("onBlur", $event.target.value);
     },
   },
 };

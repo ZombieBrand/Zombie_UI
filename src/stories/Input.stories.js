@@ -57,7 +57,7 @@ const Template = (args, { argTypes }) => {
     props: Object.keys(argTypes),
     components: { ZInput, Home },
     template:
-      "<z-input  @change='onChange' @input='onInput' @focus='onFocus' @blur='onBlur' v-bind='$props' style='width:300px'></z-input>",
+      "<z-input  @onChange='onChange' @onInput='onInput' @onFocus='onFocus' @onBlur='onBlur' v-bind='$props' style='width:300px'></z-input>",
   };
 };
 
