@@ -1,0 +1,35 @@
+.zombie-row {
+  display: flex;
+
+  &.row-flex.justify-start {
+    justify-content: flex-start;
+  }
+
+  &.row-flex.justify-end {
+    justify-content: flex-end;
+  }
+
+  &.row-flex.justify-center {
+    justify-content: center;
+  }
+
+  &.row-flex.justify-space-around {
+    justify-content: space-around;
+  }
+
+  &.row-flex.justify-space-between {
+    justify-content: space-between;
+  }
+
+  &.row-flex.align-top {
+    align-items: flex-start;
+  }
+
+  &.row-flex.align-middle {
+    align-items: center;
+  }
+
+  &.row-flex.align-bottom {
+    align-items: flex-end;
+  }
+}
