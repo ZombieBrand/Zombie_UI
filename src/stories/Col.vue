@@ -5,6 +5,16 @@
 </template>
 
 <script>
+const validator = (value) => {
+  let keys = Object.keys(value);
+  let valid = true;
+  keys.forEach((key) => {
+    if (!["span", "offset"].includes(key)) {
+      valid = false;
+    }
+  });
+  return valid;
+};
 export default {
   name: "ZombieCol",
   props: {
@@ -21,6 +31,31 @@ export default {
     offset: {
       type: [Number, String],
       default: 0,
+    },
+    phone: {
+      type: Object,
+      default: null,
+      validator,
+    },
+    ipad: {
+      type: Object,
+      default: null,
+      validator,
+    },
+    narrowPc: {
+      type: Object,
+      default: null,
+      validator,
+    },
+    pc: {
+      type: Object,
+      default: null,
+      validator,
+    },
+    widePc: {
+      type: Object,
+      default: null,
+      validator,
     },
   },
   data() {
@@ -39,7 +74,26 @@ export default {
       };
     },
     colClass() {
-      return [`col-${this.span}`, this.offset && `offset-${this.offset}`];
+      let { span, offset, phone, ipad, narrowPc, pc, widePc } = this;
+      return [
+        `col-${span}`,
+        offset && `offset-${offset}`,
+        ...this.createClasses("phone", phone),
+        ...this.createClasses("ipad", ipad),
+        ...this.createClasses("narrowPc", narrowPc),
+        ...this.createClasses("pc", pc),
+        ...this.createClasses("widePc", widePc),
+      ];
+    },
+  },
+  methods: {
+    createClasses(name, object) {
+      if (!object) return [];
+      let formatName = name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      let arr = [];
+      object.span && arr.push(`col-${formatName}-${object.span}`);
+      object.offset && arr.push(`offset-${formatName}-${object.offset}`);
+      return arr;
     },
   },
 };

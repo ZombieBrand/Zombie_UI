@@ -99,3 +99,25 @@ Primary.args = {
   align: "top",
   justify: "start",
 };
+
+const ResponsiveTemplate = (args, { argTypes }) => ({
+  components: { ZRow, ZCol },
+  props: Object.keys(argTypes),
+  template:
+    "<div style='width:800px;background:#E5E6D8;margin: 0 auto'>" +
+    '<z-row style="height:60px;" :gutter="gutter" :type="type">' +
+    '<z-col :phone="{span:8}" :ipad="{span:6}" :narrow-pc="{span:4}" :pc="{span:3}" :wide-pc="{span:1,offset:1}"><div style="background:#5F192C;height:40px"></div></z-col>' +
+    '<z-col :phone="{span:4}" :ipad="{span:6}" :narrow-pc="{span:8}" :pc="{span:9}" :wide-pc="{span:10}"><div style="background:#80223C;height:40px"></div></z-col>' +
+    '<z-col :phone="{span:4}" :ipad="{span:6}" :narrow-pc="{span:8}" :pc="{span:9}" :wide-pc="{span:10}"><div style="background:#80223C;height:40px"></div></z-col>' +
+    '<z-col :phone="{span:8}" :ipad="{span:6}" :narrow-pc="{span:4}" :pc="{span:3}" :wide-pc="{span:1,offset:1}"><div style="background:#AA2E51;height:40px"></div></z-col>' +
+    "</z-row>" +
+    "</div>",
+});
+
+export const Responsive = ResponsiveTemplate.bind({});
+Responsive.args = {
+  gutter: 20,
+  type: "flex",
+  align: "top",
+  justify: "start",
+};

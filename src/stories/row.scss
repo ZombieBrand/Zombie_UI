@@ -1,6 +1,6 @@
 .zombie-row {
   display: flex;
-
+  flex-wrap: wrap;
   &.row-flex.justify-start {
     justify-content: flex-start;
   }

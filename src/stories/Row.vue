@@ -15,7 +15,7 @@ export default {
     type: {
       type: String,
       validator: (value) => {
-        return ["flex"].indexOf(value) !== -1;
+        return ["flex", ""].indexOf(value) !== -1;
       },
       default: "",
     },
