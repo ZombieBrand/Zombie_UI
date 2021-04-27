@@ -4,6 +4,9 @@ import ZCol from "./Col";
 export default {
   components: ZRow,
   title: "Example/Layout",
+  decorators: [
+    () => ({ template: '<div style="width:1000px"><story/></div>' }),
+  ],
   parameters: {
     docs: {
       description: {
@@ -81,7 +84,7 @@ const Template = (args, { argTypes }) => ({
   components: { ZRow, ZCol },
   props: Object.keys(argTypes),
   template:
-    "<div style='width:800px;background:#E5E6D8;margin: 0 auto'>" +
+    "<div style='width:1000px;background:#E5E6D8;margin: 0 auto'>" +
     '<z-row style="height:60px;" :gutter="gutter" :type="type" :align="align" :justify="justify">' +
     '<z-col :span="span"><div style="background:#5F192C;height:40px"></div></z-col>' +
     '<z-col :span="span" :offset="offset"><div style="background:#80223C;height:40px"></div></z-col>' +
@@ -104,7 +107,7 @@ const ResponsiveTemplate = (args, { argTypes }) => ({
   components: { ZRow, ZCol },
   props: Object.keys(argTypes),
   template:
-    "<div style='width:800px;background:#E5E6D8;margin: 0 auto'>" +
+    "<div style='width:1000px;background:#E5E6D8;margin: 0 auto'>" +
     '<z-row style="height:60px;" :gutter="gutter" :type="type">' +
     '<z-col :phone="{span:8}" :ipad="{span:6}" :narrow-pc="{span:4}" :pc="{span:3}" :wide-pc="{span:1,offset:1}"><div style="background:#5F192C;height:40px"></div></z-col>' +
     '<z-col :phone="{span:4}" :ipad="{span:6}" :narrow-pc="{span:8}" :pc="{span:9}" :wide-pc="{span:10}"><div style="background:#80223C;height:40px"></div></z-col>' +

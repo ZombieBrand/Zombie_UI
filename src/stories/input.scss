@@ -20,15 +20,13 @@
 
   .icon-wrapper {
     position: absolute;
-    height: 60%;
-    width: 35px;
+    width: 21px;
+    height: 21px;
     justify-content: center;
-    color: $input-color;
-    right: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-
+    color: #495057;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-65%);
     svg {
       color: $input-placeholder-color;
     }
@@ -42,6 +40,10 @@
     font-size: 1.5em;
   }
   .error-message {
+    position: absolute;
+    bottom:0;
+    left:0;
+    transform: translateY(90%);
     color: $danger;
   }
 }

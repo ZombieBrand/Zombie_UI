@@ -37,9 +37,13 @@
 <script>
 import Icon from "./Icon";
 export default {
-  name: "ZInput",
+  name: "ZombieInput",
   components: {
     ZIcon: Icon,
+  },
+  model: {
+    prop: "value",
+    event: "onInput",
   },
   props: {
     /**

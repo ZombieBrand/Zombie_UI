@@ -12,7 +12,7 @@ import "./button.scss";
 import Waves from "../directives/waves";
 import Icon from "./Icon";
 export default {
-  name: "ZButton",
+  name: "ZombieButton",
   directives: { Waves },
   components: {
     ZIcon: Icon,
