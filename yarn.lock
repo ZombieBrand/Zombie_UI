@@ -5093,10 +5093,10 @@ core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.10.1.tgz#e683963978b6806dcc6c0a4a8bd4ab0bdaf3f21a"
   integrity sha512-pwCxEXnj27XG47mu7SXAwhLP3L5CrlvCB91ANUkIz40P27kUcvNfSdvyZJ9CLHiVoKSp+TTChMQMSKQEH/IQxA==
 
-core-js@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.nlark.com/core-js/download/core-js-3.11.0.tgz?cache=0&sync_timestamp=1619088237609&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.11.0.tgz#05dac6aa70c0a4ad842261f8957b961d36eb8926"
-  integrity sha1-BdrGqnDApK2EImH4lXuWHTbriSY=
+core-js@^3.11.1:
+  version "3.11.1"
+  resolved "https://registry.nlark.com/core-js/download/core-js-3.11.1.tgz#f920392bf8ed63a0ec8e4e729857bfa3d121c525"
+  integrity sha1-+SA5K/jtY6Dsjk5ymFe/o9EhxSU=
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -12394,10 +12394,10 @@ sass-loader@^8.0.2:
     schema-utils "^2.6.1"
     semver "^6.3.0"
 
-sass@^1.32.11:
-  version "1.32.11"
-  resolved "https://registry.nlark.com/sass/download/sass-1.32.11.tgz#b236b3ea55c76602c2ef2bd0445f0db581baa218"
-  integrity sha1-sjaz6lXHZgLC7yvQRF8NtYG6ohg=
+sass@^1.32.12:
+  version "1.32.12"
+  resolved "https://registry.nlark.com/sass/download/sass-1.32.12.tgz?cache=0&sync_timestamp=1619647491919&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsass%2Fdownload%2Fsass-1.32.12.tgz#a2a47ad0f1c168222db5206444a30c12457abb9f"
+  integrity sha1-oqR60PHBaCIttSBkRKMMEkV6u58=
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
