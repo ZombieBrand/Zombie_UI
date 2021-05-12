@@ -1,6 +1,6 @@
 import Toast from "./Toast";
 export default {
-  install(Vue, options) {
+  install(Vue) {
     Vue.prototype.$toast = function (message, toastOptions) {
       let Constructor = Vue.extend(Toast);
       let toast = new Constructor({
