@@ -24,10 +24,25 @@ export default {
       },
     },
     size: {
-      control: { type: "select", options: ["small", "medium", "large"] },
+      options: ["small", "medium", "large"],
+      control: {
+        type: "select",
+        labels: {
+          small: "small",
+          medium: "medium",
+          large: "large",
+        },
+      },
     },
     status: {
-      control: { type: "select", options: ["success", "error"] },
+      options: ["success", "error"],
+      control: {
+        type: "select",
+        labels: {
+          success: "success",
+          error: "error",
+        },
+      },
     },
     onBlur: {
       description: "在 Input 失去焦点时触发",

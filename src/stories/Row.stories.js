@@ -59,9 +59,16 @@ export default {
           summary: "start",
         },
       },
+      options: ["start", "end", "center", "space-around", "space-between"],
       control: {
         type: "select",
-        options: ["start", "end", "center", "space-around", "space-between"],
+        labels: {
+          start: "start",
+          end: "end",
+          center: "center",
+          ["space-around"]: "space-around",
+          ["space-between"]: "space-between",
+        },
       },
     },
     align: {
@@ -72,9 +79,14 @@ export default {
           summary: "top",
         },
       },
+      options: ["top", "middle", "bottom"],
       control: {
         type: "select",
-        options: ["top", "middle", "bottom"],
+        labels: {
+          top: "top",
+          middle: "middle",
+          bottom: "bottom",
+        },
       },
     },
   },

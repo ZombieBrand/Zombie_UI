@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <z-button label="button" background-color="primary" primary></z-button>
+    <z-button
+      label="button"
+      background-color="primary"
+      primary
+      @onClick="showToast"
+    ></z-button>
     <z-switch v-model="switchVal"></z-switch>
     <z-input v-model="inputVal"></z-input>
   </div>
@@ -22,6 +27,22 @@ export default {
       switchVal: false,
       inputVal: "测试",
     };
+  },
+  methods: {
+    showToast() {
+      this.$toast(`我是toast,${parseInt((Math.random() * 100).toString())}`, {
+        position: "bottom",
+        enableHtml: true,
+        closeButton: {
+          text: "关闭",
+          callback() {
+            console.log("已经触发了Toast");
+          },
+        },
+        autoClose: false,
+        autoCloseDelay: 3,
+      });
+    },
   },
 };
 </script>

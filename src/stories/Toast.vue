@@ -1,11 +1,12 @@
 <template>
-  <div class="toast" refs="wrapper">
+  <div ref="wrapper" :class="toastClasses" class="toast">
     <div class="message">
       <slot v-if="!enableHtml"></slot>
       <!--    eslint-disable-next-line -->
-    <div v-else v-html="$slots.default[0]"></div></div>
+      <div v-else v-html="$slots.default[0]"></div>
+    </div>
     <div ref="line" class="line"></div>
-    <span v-if="closeButton" class="close" @click="closeButton.callback()">{{
+    <span v-if="closeButton" class="close" @click="onClickBtn">{{
       closeButton.text
     }}</span>
   </div>
@@ -15,11 +16,6 @@
 export default {
   name: "ZombieToast",
   props: {
-    /*是否开启自动关闭功能*/
-    autoClose: {
-      type: Boolean,
-      default: true,
-    },
     /*自动关闭时间 单位 秒*/
     autoCloseDelay: {
       type: Number,
@@ -42,10 +38,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    /*显示的位置*/
+    position: {
+      type: String,
+      default: "top",
+      validator(value) {
+        return ["top", "bottom", "middle"].indexOf(value) !== -1;
+      },
+    },
+  },
+  computed: {
+    toastClasses() {
+      return { [`position-${this.position}`]: true };
+    },
   },
   mounted() {
     this.updateStyles();
-    if (this.autoClose) {
+    if (this.autoCloseDelay > 0) {
       setTimeout(() => {
         this.close();
       }, this.autoCloseDelay * 1000);
@@ -72,34 +81,93 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 100%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0%);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .toast {
   display: flex;
   align-items: center;
   position: fixed;
-  top: 0;
   left: 50%;
-  transform: translateX(-50%);
   min-height: $toast-min-height;
   font-size: $font-size;
   background: $toast-bg;
   border-radius: 4px;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   padding: 0 16px;
+  color: white;
+
   .message {
     padding: 6px 0;
   }
+
   .close {
     padding-left: 16px;
     flex-shrink: 0;
   }
+
   .line {
     height: 100%;
     border-left: 1px solid #666;
     margin-left: 16px;
+  }
+
+  &.position-top {
+    top: 0;
+    transform: translateX(-50%);
+    animation: slideUp 0.3s;
+    & {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  &.position-bottom {
+    bottom: 0;
+    transform: translateX(-50%);
+    animation: slideDown 0.3s;
+    & {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &.position-middle {
+    top: 50%;
+    transform: translateX(-50%, -50%);
+    animation: fade-in 0.3s;
   }
 }
 </style>

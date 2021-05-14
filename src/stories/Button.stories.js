@@ -13,13 +13,29 @@ export default {
   component: ZButton,
   argTypes: {
     type: {
+      options: ["primary", "success", "info", "warning", "danger", false],
       control: {
         type: "select",
-        options: ["primary", "success", "info", "warning", "danger", false],
+        labels: {
+          primary: "primary",
+          success: "success",
+          info: "info",
+          warning: "warning",
+          danger: "danger",
+          default: false,
+        },
       },
     },
     size: {
-      control: { type: "select", options: ["small", "medium", "large"] },
+      options: ["small", "medium", "large"],
+      control: {
+        type: "select",
+        labels: {
+          small: "small",
+          medium: "medium",
+          large: "large",
+        },
+      },
     },
   },
 };
