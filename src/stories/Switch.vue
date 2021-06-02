@@ -6,15 +6,14 @@
       class="offscreen"
       type="checkbox"
       @change="onChange($event)"
-    />
+    >
     <label
       class="switch"
       for="toggle"
       :style="{ backgroundColor: checked ? activeColor : inactiveColor }"
-      ><span class="switch-label">
-        {{ checked ? activeText : inactiveText }}
-      </span></label
-    >
+    ><span class="switch-label">
+      {{ checked ? activeText : inactiveText }}
+    </span></label>
   </div>
 </template>
 

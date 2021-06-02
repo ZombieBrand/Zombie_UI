@@ -1,6 +1,9 @@
 <template>
-  <header class="zombie-header" :style="{ height: height + 'px' }">
-    <slot></slot>
+  <header
+    class="zombie-header"
+    :style="{ height: height + 'px' }"
+  >
+    <slot />
   </header>
 </template>
 

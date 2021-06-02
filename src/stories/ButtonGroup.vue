@@ -1,6 +1,6 @@
 <template>
   <div class="zombie-button-group">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

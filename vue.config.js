@@ -3,5 +3,5 @@ module.exports = {
     sourceMap: true,
   },
 
-  lintOnSave: false
+  lintOnSave: false,
 };

@@ -1,13 +1,25 @@
 <template>
   <div id="app">
     <z-button
-      label="button"
       background-color="primary"
+      label="button"
       primary
       @onClick="showToast"
-    ></z-button>
-    <z-switch v-model="switchVal"></z-switch>
-    <z-input v-model="inputVal"></z-input>
+    />
+    <z-switch v-model="switchVal" />
+    <z-input v-model="inputVal" />
+    <z-tabs :activated.sync="'test1'">
+      <z-tabs-head>
+        <z-tabs-item name="test1">
+          1
+        </z-tabs-item>
+      </z-tabs-head>
+      <z-tabs-body>
+        <z-tabs-pane name="test1">
+          测试1
+        </z-tabs-pane>
+      </z-tabs-body>
+    </z-tabs>
   </div>
 </template>
 
@@ -15,12 +27,23 @@
 import ZButton from "./stories/Button";
 import ZInput from "./stories/Input";
 import ZSwitch from "./stories/Switch";
+import ZTabs from "./stories/Tabs";
+import ZTabsBody from "./stories/TabsBody";
+import ZTabsHead from "./stories/TabsHead";
+import ZTabsItem from "./stories/TabsItem";
+import ZTabsPane from "./stories/TabsPane";
+
 export default {
   name: "App",
   components: {
     ZButton,
     ZInput,
     ZSwitch,
+    ZTabs,
+    ZTabsBody,
+    ZTabsHead,
+    ZTabsItem,
+    ZTabsPane,
   },
   data() {
     return {
@@ -28,21 +51,6 @@ export default {
       inputVal: "测试",
     };
   },
-  methods: {
-    showToast() {
-      this.$toast(`我是toast,${parseInt((Math.random() * 100).toString())}`, {
-        position: "bottom",
-        enableHtml: true,
-        closeButton: {
-          text: "关闭",
-          callback() {
-            console.log("已经触发了Toast");
-          },
-        },
-        autoClose: false,
-        autoCloseDelay: 3,
-      });
-    },
-  },
+  methods: {},
 };
 </script>

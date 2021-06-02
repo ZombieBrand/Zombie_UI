@@ -1,6 +1,10 @@
 <template>
-  <div :class="rowClass" :style="rowStyle" class="zombie-row">
-    <slot></slot>
+  <div
+    :class="rowClass"
+    :style="rowStyle"
+    class="zombie-row"
+  >
+    <slot />
   </div>
 </template>
 

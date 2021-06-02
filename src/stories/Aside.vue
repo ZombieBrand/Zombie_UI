@@ -1,12 +1,15 @@
 <template>
-  <aside class="zombie-aside" :style="{ width: collapsibleWidth }">
-    <slot></slot>
+  <aside
+    class="zombie-aside"
+    :style="{ width: collapsibleWidth }"
+  >
+    <slot />
     <div
       v-if="collapsible"
       class="collapsible-button"
       @click="toggleCollapsible"
     >
-      {{ collapsible ? "<" : ">" }}
+      {{ collapsible ? "《" : "》" }}
     </div>
   </aside>
 </template>

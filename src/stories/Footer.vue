@@ -1,6 +1,9 @@
 <template>
-  <footer class="zombie-footer" :style="{ height: height + 'px' }">
-    <slot></slot>
+  <footer
+    class="zombie-footer"
+    :style="{ height: height + 'px' }"
+  >
+    <slot />
   </footer>
 </template>
 

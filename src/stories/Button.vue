@@ -1,9 +1,21 @@
 <template>
-  <button v-waves type="button" :class="classes" @click="onClick">
-    <z-icon v-if="loading" class="loading" name="loading"></z-icon>
-    <span v-if="loading" class="loading-description">加载中</span>
+  <button
+    v-waves
+    type="button"
+    :class="classes"
+    @click="onClick"
+  >
+    <z-icon
+      v-if="loading"
+      class="loading"
+      name="loading"
+    />
+    <span
+      v-if="loading"
+      class="loading-description"
+    >加载中</span>
     {{ !circle && !loading ? label : "" }}
-    <slot v-if="!loading"></slot>
+    <slot v-if="!loading" />
   </button>
 </template>
 

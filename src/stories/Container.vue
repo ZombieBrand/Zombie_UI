@@ -1,6 +1,9 @@
 <template>
-  <section class="zombie-container" :class="containerClass">
-    <slot></slot>
+  <section
+    class="zombie-container"
+    :class="containerClass"
+  >
+    <slot />
   </section>
 </template>
 

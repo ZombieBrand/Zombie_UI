@@ -1,12 +1,23 @@
 <template>
-  <div ref="wrapper" :class="toastClasses" class="toast">
+  <div
+    ref="wrapper"
+    :class="toastClasses"
+    class="toast"
+  >
     <div class="message">
-      <slot v-if="!enableHtml"></slot>
+      <slot v-if="!enableHtml" />
       <!--    eslint-disable-next-line -->
       <div v-else v-html="$slots.default[0]"></div>
     </div>
-    <div ref="line" class="line"></div>
-    <span v-if="closeButton" class="close" @click="onClickBtn">{{
+    <div
+      ref="line"
+      class="line"
+    />
+    <span
+      v-if="closeButton"
+      class="close"
+      @click="onClickBtn"
+    >{{
       closeButton.text
     }}</span>
   </div>
@@ -23,7 +34,7 @@ export default {
     },
     /*关闭button文字和回调方法*/
     closeButton: {
-      type: Object,
+      type: [Object, Function],
       default: () => {
         return {
           text: "关闭",

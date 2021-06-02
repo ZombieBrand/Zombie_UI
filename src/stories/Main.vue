@@ -1,6 +1,6 @@
 <template>
   <main class="zombie-main">
-    <slot></slot>
+    <slot />
   </main>
 </template>
 

@@ -6,12 +6,12 @@
         v-show="status === 'success'"
         name="success"
         class="success-icon"
-      ></z-icon>
+      />
       <z-icon
         v-show="status === 'error'"
         name="error"
         class="error-icon"
-      ></z-icon>
+      />
     </div>
     <label style="width: 100%">
       <input
@@ -25,7 +25,7 @@
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
-      />
+      >
       <template v-if="status === 'error'">
         <span class="error-message">{{ errorMessage }}</span>
       </template>

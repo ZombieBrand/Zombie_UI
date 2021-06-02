@@ -1,6 +1,10 @@
 <template>
-  <div class="zombie-col" :class="colClass" :style="colStyle">
-    <slot></slot>
+  <div
+    class="zombie-col"
+    :class="colClass"
+    :style="colStyle"
+  >
+    <slot />
   </div>
 </template>
 

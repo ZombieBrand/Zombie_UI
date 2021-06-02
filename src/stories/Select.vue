@@ -1,14 +1,18 @@
 <template>
   <div>
     <label for="country">请选择喜欢的国家:</label>
-    <input id="country" list="countries" name="country" />
+    <input
+      id="country"
+      list="countries"
+      name="country"
+    >
     <datalist id="countries">
-      <option value="UK"></option>
-      <option value="Germany"></option>
-      <option value="USA"></option>
-      <option value="Japan"></option>
-      <option value="India"></option>
-      <option value="“China”"></option>
+      <option value="UK" />
+      <option value="Germany" />
+      <option value="USA" />
+      <option value="Japan" />
+      <option value="India" />
+      <option value="“China”" />
     </datalist>
   </div>
 </template>
