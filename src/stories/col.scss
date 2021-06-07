@@ -1,28 +1,28 @@
-
+@use "sass:math";
 .zombie-col {
   $class: col-;
   @for $n from 1 through 24 {
     &.#{$class}#{$n} {
-      width: $n / 24 * 100%
+      width: math.div($n,24) * 100%
     }
   }
   $class-offset: offset-;
   @for $n from 1 through 24 {
     &.#{$class-offset}#{$n} {
-      margin-left: $n / 24 * 100%
+      margin-left: math.div($n,24) * 100%
     }
   }
   @media (max-width: 768px) {
     $class: col-phone-;
     @for $n from 1 through 24 {
       &.#{$class}#{$n} {
-        width: $n / 24 * 100%
+        width: math.div($n,24) * 100%
       }
     }
     $class-offset: offset-phone-;
     @for $n from 1 through 24 {
       &.#{$class-offset}#{$n} {
-        margin-left: $n / 24 * 100%
+        margin-left: math.div($n,24) * 100%
       }
     }
   }
@@ -30,13 +30,13 @@
     $class: col-ipad-;
     @for $n from 1 through 24 {
       &.#{$class}#{$n} {
-        width: $n / 24 * 100%
+        width: math.div($n,24) * 100%
       }
     }
     $class-offset: offset-ipad-;
     @for $n from 1 through 24 {
       &.#{$class-offset}#{$n} {
-        margin-left: $n / 24 * 100%
+        margin-left: math.div($n,24) * 100%
       }
     }
   }
@@ -44,13 +44,13 @@
     $class: col-narrow-pc-;
     @for $n from 1 through 24 {
       &.#{$class}#{$n} {
-        width: $n / 24 * 100%
+        width: math.div($n,24) * 100%
       }
     }
     $class-offset: offset-narrow-pc-;
     @for $n from 1 through 24 {
       &.#{$class-offset}#{$n} {
-        margin-left: $n / 24 * 100%
+        margin-left: math.div($n,24) * 100%
       }
     }
   }
@@ -58,13 +58,13 @@
     $class: col-pc-;
     @for $n from 1 through 24 {
       &.#{$class}#{$n} {
-        width: $n / 24 * 100%
+        width: math.div($n,24) * 100%
       }
     }
     $class-offset: offset-pc-;
     @for $n from 1 through 24 {
       &.#{$class-offset}#{$n} {
-        margin-left: $n / 24 * 100%
+        margin-left: math.div($n,24) * 100%
       }
     }
   }
@@ -72,13 +72,13 @@
     $class: col-wide-pc-;
     @for $n from 1 through 24 {
       &.#{$class}#{$n} {
-        width: $n / 24 * 100%
+        width: math.div($n,24) * 100%
       }
     }
     $class-offset: offset-wide-pc-;
     @for $n from 1 through 24 {
       &.#{$class-offset}#{$n} {
-        margin-left: $n / 24 * 100%
+        margin-left: math.div($n,24) * 100%
       }
     }
   }

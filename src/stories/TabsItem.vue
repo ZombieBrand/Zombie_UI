@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     handleActivated() {
-      this.eventBus.$emit("update:activated", this.name,);
+      this.eventBus.$emit("update:activated", this.name, this);
     },
   },
 };

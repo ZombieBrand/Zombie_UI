@@ -32,7 +32,15 @@ export default {
     };
   },
   mounted() {
-    this.eventBus.$emit("update:activated", this.activated);
+    this.$children.forEach((vm)=>{
+      if(vm.$options.name === 'ZombieTabsHead'){
+        vm.$children.forEach(childVm=>{
+          if(childVm.$options.name === 'ZombieTabsItem' && childVm.name === this.activated){
+            this.eventBus.$emit("update:activated", this.activated);
+          }
+        })
+      }
+    })
   },
 };
 </script>

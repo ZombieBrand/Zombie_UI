@@ -18,7 +18,7 @@ const Template = (args, { argTypes }) => {
       };
     },
     template:
-      "<z-tabs :activated.sync='active'>" +
+      "<z-tabs :activated.sync='first'>" +
       " <z-tabs-head>" +
       "   <template slot='actions'>设置</template>" +
       "   <z-tabs-item name='first'>用户管理</z-tabs-item>" +
