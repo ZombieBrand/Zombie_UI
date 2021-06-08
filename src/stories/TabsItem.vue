@@ -1,8 +1,9 @@
 <template>
   <div
+    ref="tabsItem"
     class="zombie-tabs-item"
     :class="classes"
-    @click="handleActivated"
+    @click="handleActivated()"
   >
     <slot />
   </div>
@@ -41,7 +42,7 @@ export default {
   },
   methods: {
     handleActivated() {
-      this.eventBus.$emit("update:activated", this.name, this);
+      this.eventBus.$emit("update:activated", this.name);
     },
   },
 };
@@ -56,8 +57,25 @@ export default {
   align-items: center;
   flex-shrink: 0;
   transition: opacity 0.3s;
+  position: relative;
   &.active {
     color: $primary;
+  }
+  &.active:after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $primary;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
   }
 }
 </style>

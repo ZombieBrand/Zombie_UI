@@ -12,6 +12,7 @@ export default {
     activated: {
       type: String,
       required: true,
+      default: ''
     },
     position: {
       type: String,
@@ -36,7 +37,7 @@ export default {
       if(vm.$options.name === 'ZombieTabsHead'){
         vm.$children.forEach(childVm=>{
           if(childVm.$options.name === 'ZombieTabsItem' && childVm.name === this.activated){
-            this.eventBus.$emit("update:activated", this.activated);
+              this.eventBus.$emit("update:activated", this.activated);
           }
         })
       }
