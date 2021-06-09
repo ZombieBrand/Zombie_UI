@@ -48,5 +48,6 @@ export default {
 <style scoped lang="scss">
 .zombie-tabs {
   min-height: 40px;
+  min-width: 300px;
 }
 </style>

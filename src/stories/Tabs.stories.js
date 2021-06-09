@@ -23,22 +23,27 @@ export default {
   },
 };
 const Template = (args, { argTypes }) => {
-  delete argTypes["v-model"];
   return {
     props: Object.keys(argTypes),
     components: { ZTabs, ZTabsBody, ZTabsHead, ZTabsItem, ZTabsPane },
     template:
-      "<z-tabs :activated='`first`'>" +
+      "<z-tabs  v-bind:activated='activated' v-bind:position='position'>" +
       " <z-tabs-head>" +
       "   <template slot='actions'>设置</template>" +
       "   <z-tabs-item name='first'>用户管理</z-tabs-item>" +
-      "   <z-tabs-item name='second'>配置管理</z-tabs-item>" +
+      "   <z-tabs-item name='second' v-bind:disabled='true'>配置管理</z-tabs-item>" +
+      "   <z-tabs-item name='third'>权限管理</z-tabs-item>" +
       " </z-tabs-head>" +
       " <z-tabs-body>" +
       "   <z-tabs-pane name='first'>用户管理</z-tabs-pane>" +
       "   <z-tabs-pane name='second'>配置管理</z-tabs-pane>" +
+      "   <z-tabs-pane name='third'>权限管理</z-tabs-pane>" +
       " </z-tabs-body>" +
       "</z-tabs>",
   };
 };
 export const Primary = Template.bind({});
+Primary.args = {
+  position:'top',
+  activated:'first'
+};

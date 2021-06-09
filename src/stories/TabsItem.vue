@@ -32,6 +32,7 @@ export default {
     classes() {
       return {
         active: this.activated,
+        disabled: this.disabled
       };
     },
   },
@@ -42,6 +43,7 @@ export default {
   },
   methods: {
     handleActivated() {
+      if(this.disabled)return
       this.eventBus.$emit("update:activated", this.name);
     },
   },
@@ -76,6 +78,10 @@ export default {
     background-color: $primary;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
+  }
+  &.disabled{
+    color: $gray-500;
+    cursor: not-allowed;
   }
 }
 </style>
