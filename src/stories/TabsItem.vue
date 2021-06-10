@@ -2,6 +2,7 @@
   <div
     ref="tabsItem"
     class="zombie-tabs-item"
+    :data-name="name"
     :class="classes"
     @click="handleActivated()"
   >
@@ -26,20 +27,21 @@ export default {
   data() {
     return {
       activated: false,
+      position:'top'
     };
   },
   computed: {
     classes() {
-      return {
-        active: this.activated,
-        disabled: this.disabled
-      };
+      return [{ active: this.activated, disabled: this.disabled },`layout-${this.position}`];
     },
   },
   created() {
     this.eventBus.$on("update:activated", (name) => {
       this.activated = name === this.name;
     });
+    this.eventBus.$on('position',(position)=>{
+      this.position = position
+    })
   },
   methods: {
     handleActivated() {
@@ -51,9 +53,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "./styles/index.scss";
+$tab-height: 40px;
 .zombie-tabs-item {
   cursor: pointer;
-  min-height: 100%;
+  height:$tab-height;
   padding: 0 1em;
   display: flex;
   align-items: center;
@@ -63,18 +66,9 @@ export default {
   &.active {
     color: $primary;
   }
-  &.active:after{
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
   &:after{
     content: '';
     position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
     background-color: $primary;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
@@ -82,6 +76,58 @@ export default {
   &.disabled{
     color: $gray-500;
     cursor: not-allowed;
+  }
+  &.layout-top{
+    &:after{
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+    }
+    &.active:after{
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+  &.layout-left{
+    &:after{
+      width: 2px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      transform: scaleY(0);
+    }
+    &.active:after{
+      transform: scaleY(1);
+      transform-origin: top right;
+    }
+  }
+  &.layout-right{
+    &:after{
+      width: 2px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform: scaleY(0);
+    }
+    &.active:after{
+      transform: scaleY(1);
+      transform-origin: top left;
+    }
+  }
+  &.layout-bottom{
+    &:after{
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+    }
+    &.active:after{
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
   }
 }
 </style>

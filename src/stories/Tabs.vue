@@ -1,5 +1,8 @@
 <template>
-  <div class="zombie-tabs">
+  <div
+    class="zombie-tabs"
+    :class="[`layout-${position}`]"
+  >
     <slot />
   </div>
 </template>
@@ -33,6 +36,10 @@ export default {
     };
   },
   mounted() {
+    if(this.$children.length===0){
+      console.warn('z-tabs的子组件缺少z-tabs-header和z-tabs-body')
+    }
+    this.eventBus.$emit('position',this.position)
     this.$children.forEach((vm)=>{
       if(vm.$options.name === 'ZombieTabsHead'){
         vm.$children.forEach(childVm=>{
@@ -48,6 +55,19 @@ export default {
 <style scoped lang="scss">
 .zombie-tabs {
   min-height: 40px;
-  min-width: 300px;
+  width: 100%;
+  display: flex;
+  &.layout-top{
+    flex-direction: column;
+  }
+  &.layout-bottom{
+    flex-direction: column-reverse;
+  }
+  &.layout-left{
+    flex-flow: row nowrap;
+  }
+  &.layout-right{
+    flex-flow: row nowrap;
+  }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="zombie-tabs-body">
+  <div
+    class="zombie-tabs-body"
+    :class="[`layout-${position}`]"
+  >
     <slot />
   </div>
 </template>
@@ -8,7 +11,20 @@
 export default {
   name: "ZombieTabsBody",
   inject: ["eventBus"],
+  data(){
+    return{
+      position:'top'
+    }
+  },
+  created() {
+    this.eventBus.$on('position',(position)=>{
+      this.position = position
+    })
+  }
 };
 </script>
-
-<style></style>
+<style scoped lang="scss">
+.zombie-tabs-body{
+  flex-grow: 1;
+}
+</style>

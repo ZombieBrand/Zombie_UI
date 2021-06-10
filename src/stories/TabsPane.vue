@@ -3,6 +3,7 @@
     v-if="activated"
     class="zombie-tabs-pane"
     :class="classes"
+    :data-name="name"
   >
     <slot />
   </div>
