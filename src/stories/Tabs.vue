@@ -43,7 +43,7 @@ export default {
     this.$children.forEach((vm)=>{
       if(vm.$options.name === 'ZombieTabsHead'){
         vm.$children.forEach(childVm=>{
-          if(childVm.$options.name === 'ZombieTabsItem' && childVm.name === this.activated){
+          if(childVm.$options.name === 'ZombieTa bsItem' && childVm.name === this.activated){
               this.eventBus.$emit("update:activated", this.activated);
           }
         })
