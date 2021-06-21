@@ -3,35 +3,32 @@
     <z-input v-model="inputVal" />
     <z-popover>
       <template #content>
-        popover-content
+        <p>popover-content</p>
+        <p>popover-content</p>
       </template>
-      <z-button>
-        popover
-      </z-button>
+      <z-button> popover </z-button>
     </z-popover>
   </div>
 </template>
 
 <script>
 import ZInput from "./stories/Input";
-import ZPopover from './stories/Popover';
-import ZButton from './stories/Button'
+import ZPopover from "./stories/Popover";
+import ZButton from "./stories/Button";
 export default {
   name: "App",
   components: {
     ZInput,
     ZPopover,
-    ZButton
+    ZButton,
   },
   data() {
     return {
-      inputVal:''
+      inputVal: "",
     };
   },
   methods: {
-    clickPopover(){
-
-    }
+    clickPopover() {},
   },
 };
 </script>
