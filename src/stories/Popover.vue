@@ -15,6 +15,7 @@
       ref="popoverContent"
       :style="styles"
       class="content-wrapper"
+      :class="{ [`position-${position}`]: true }"
     >
       <slot name="content" />
     </div>
@@ -24,14 +25,36 @@
 <script>
 export default {
   name: "ZombiePopover",
+  props: {
+    maxWidth: {
+      type: Number,
+      default: 300,
+    },
+    position: {
+      type: String,
+      default: "bottom",
+      validator: (value) => {
+        return ["top", "left", "right", "bottom"].indexOf(value) !== -1;
+      },
+    },
+  },
   data() {
     return {
       popoverShow: false,
-      styles: {
+      positionOptions: {
         top: 0,
         left: 0,
       },
     };
+  },
+  computed: {
+    styles() {
+      return {
+        top: this.positionOptions.top + "px",
+        left: this.positionOptions.left + "px",
+        ["max-width"]: this.maxWidth + "px",
+      };
+    },
   },
   methods: {
     onClick($event) {
@@ -52,10 +75,35 @@ export default {
       document.body.appendChild(this.$refs.popoverContent);
       let { width, height, top, left } =
         this.$refs.popoverTrigger.getBoundingClientRect();
-      this.styles = {
-        top: `${top + window.scrollY + height}px`,
-        left: `${left + window.scrollX}px`,
+      let { width: cwidth, height: cheight } =
+        this.$refs.popoverContent.getBoundingClientRect();
+      let handlePosistion = {
+        top: () => {
+          this.positionOptions = {
+            top: top + window.scrollY - cheight - 10,
+            left: left + window.scrollX - cwidth / 2 + width / 2,
+          };
+        },
+        bottom: () => {
+          this.positionOptions = {
+            top: top + window.scrollY + height + 10,
+            left: left + window.scrollX - cwidth / 2 + width / 2,
+          };
+        },
+        left: () => {
+          this.positionOptions = {
+            top: top + window.scrollY - height / 2,
+            left: left + window.scrollX - cwidth - 10,
+          };
+        },
+        right: () => {
+          this.positionOptions = {
+            top: top + window.scrollY - height / 2,
+            left: left + window.scrollX + width + 10,
+          };
+        },
       };
+      handlePosistion[this.position]();
     },
     // 添加关闭监听
     listenToDocument() {
@@ -67,7 +115,6 @@ export default {
         this.$refs.popoverWrap === e.target
       ) {
         this.onClose();
-      } else {
       }
     },
     // 显示popover content
@@ -93,7 +140,74 @@ export default {
 
 .content-wrapper {
   position: absolute;
-  bottom: 100%;
-  left: 50%;
+  z-index: 99;
+  border: 1px solid #333;
+  border-radius: 4px;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  background: white;
+  padding: 0.5em 1em;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    border: 11px solid transparent;
+  }
+  &:after {
+    border: 10px solid transparent;
+  }
+  &.position-top {
+    &:before,
+    &:after {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-11px);
+      border-top-color: #000000;
+    }
+    &:after {
+      left: 50%;
+      transform: translateX(-10px);
+      border-top-color: #ffffff;
+    }
+  }
+  &.position-bottom {
+    &:before,
+    &:after {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-11px);
+      border-bottom-color: #000000;
+    }
+    &:after {
+      left: 50%;
+      transform: translateX(-10px);
+      border-bottom-color: #ffffff;
+    }
+  }
+  &.position-left {
+    &:before,
+    &:after {
+      left: 100%;
+      top: 50%;
+      transform: translateY(-11px);
+      border-left-color: #000000;
+    }
+    &:after {
+      transform: translateY(-10px);
+      border-left-color: #ffffff;
+    }
+  }
+  &.position-right {
+    &:before,
+    &:after {
+      right: 100%;
+      top: 50%;
+      transform: translateY(-11px);
+      border-right-color: #000000;
+    }
+    &:after {
+      transform: translateY(-10px);
+      border-right-color: #ffffff;
+    }
+  }
 }
 </style>

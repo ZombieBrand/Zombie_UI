@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <z-input v-model="inputVal" />
-    <z-popover>
+    <z-popover style="margin:500px">
       <template #content>
-        <p>popover-content</p>
-        <p>popover-content</p>
+        popover-content popover-content popover-content popover-content popover-content popover-content
       </template>
       <z-button> popover </z-button>
     </z-popover>
