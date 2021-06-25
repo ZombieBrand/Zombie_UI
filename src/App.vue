@@ -1,9 +1,14 @@
 <template>
   <div id="app">
     <z-input v-model="inputVal" />
-    <z-popover style="margin:500px">
+    <z-popover
+      style="margin:500px"
+    >
       <template #content>
         popover-content popover-content popover-content popover-content popover-content popover-content
+        <z-button @click="popClose">
+          关闭
+        </z-button>
       </template>
       <z-button> popover </z-button>
     </z-popover>
@@ -24,10 +29,14 @@ export default {
   data() {
     return {
       inputVal: "",
+      popover: false
     };
   },
   methods: {
     clickPopover() {},
+    popClose(){
+      this.popover = false
+    }
   },
 };
 </script>

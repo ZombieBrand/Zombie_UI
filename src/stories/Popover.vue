@@ -6,7 +6,8 @@
     <div
       ref="popoverTrigger"
       class="trigger"
-      @click="onClick($event)"
+      @[openEvent]="handleShow"
+      @[closeEvent]="onClose"
     >
       <slot />
     </div>
@@ -15,7 +16,7 @@
       ref="popoverContent"
       :style="styles"
       class="content-wrapper"
-      :class="{ [`position-${position}`]: true }"
+      :class="[`position-${position}`, popperClass]"
     >
       <slot name="content" />
     </div>
@@ -26,15 +27,38 @@
 export default {
   name: "ZombiePopover",
   props: {
+    /**
+     * 宽度
+     */
     maxWidth: {
       type: Number,
       default: 300,
     },
+    /**
+     * 出现位置
+     */
     position: {
       type: String,
       default: "bottom",
       validator: (value) => {
         return ["top", "left", "right", "bottom"].indexOf(value) !== -1;
+      },
+    },
+    /**
+     * 为 popper 添加类名
+     */
+    popperClass: {
+      type: String,
+      default: "",
+    },
+    /**
+     * 触发方式
+     */
+    trigger: {
+      type: String,
+      default: "click",
+      validator: (value) => {
+        return ["click", "hover"].indexOf(value) !== -1;
       },
     },
   },
@@ -55,8 +79,21 @@ export default {
         ["max-width"]: this.maxWidth + "px",
       };
     },
+    openEvent() {
+      return this.trigger === "click" ? "click" : "mouseenter";
+    },
+    closeEvent() {
+      return this.trigger === "click" ? "" : "mouseleave";
+    },
   },
   methods: {
+    handleShow($event) {
+      if (this.openEvent === "click") {
+        this.onClick($event);
+      } else {
+        this.onShow();
+      }
+    },
     onClick($event) {
       if (this.$refs.popoverTrigger.contains($event.target)) {
         if (this.popoverShow) {
@@ -73,48 +110,57 @@ export default {
     // 定位
     positionContent() {
       document.body.appendChild(this.$refs.popoverContent);
-      let { width, height, top, left } =
-        this.$refs.popoverTrigger.getBoundingClientRect();
-      let { width: cwidth, height: cheight } =
-        this.$refs.popoverContent.getBoundingClientRect();
-      let handlePosistion = {
-        top: () => {
-          this.positionOptions = {
-            top: top + window.scrollY - cheight - 10,
-            left: left + window.scrollX - cwidth / 2 + width / 2,
-          };
-        },
-        bottom: () => {
-          this.positionOptions = {
-            top: top + window.scrollY + height + 10,
-            left: left + window.scrollX - cwidth / 2 + width / 2,
-          };
-        },
-        left: () => {
-          this.positionOptions = {
-            top: top + window.scrollY - height / 2,
-            left: left + window.scrollX - cwidth - 10,
-          };
-        },
-        right: () => {
-          this.positionOptions = {
-            top: top + window.scrollY - height / 2,
-            left: left + window.scrollX + width + 10,
-          };
-        },
-      };
-      handlePosistion[this.position]();
+      this.$nextTick(() => {
+        let { width, height, top, left } =
+          this.$refs.popoverTrigger.getBoundingClientRect();
+        let { width: cwidth, height: cheight } =
+          this.$refs.popoverContent.getBoundingClientRect();
+        let handlePosistion = {
+          top: () => {
+            this.positionOptions = {
+              top: top + window.scrollY - cheight - 10,
+              left: left + window.scrollX - cwidth / 2 + width / 2,
+            };
+          },
+          bottom: () => {
+            this.positionOptions = {
+              top: top + window.scrollY + height + 10,
+              left: left + window.scrollX - cwidth / 2 + width / 2,
+            };
+          },
+          left: () => {
+            this.positionOptions = {
+              top: top + window.scrollY - cheight / 2 + height / 2,
+              left: left + window.scrollX - cwidth - 10,
+            };
+          },
+          right: () => {
+            this.positionOptions = {
+              top: top + window.scrollY - cheight / 2 + height / 2,
+              left: left + window.scrollX + width + 10,
+            };
+          },
+        };
+        handlePosistion[this.position]();
+      });
     },
     // 添加关闭监听
     listenToDocument() {
       document.addEventListener("click", this.eventHandle);
     },
     eventHandle(e) {
+      console.log(!this.$refs.popoverWrap.contains(e.target));
       if (
         !this.$refs.popoverWrap.contains(e.target) ||
-        this.$refs.popoverWrap === e.target
+        !this.$refs.popoverWrap === e.target
       ) {
-        this.onClose();
+        console.log(e, "eventHandle");
+        if (
+          !this.$refs.popoverContent.contains(e.target) ||
+          !this.$refs.popoverContent === e.target
+        ) {
+          this.onClose();
+        }
       }
     },
     // 显示popover content
@@ -132,7 +178,8 @@ export default {
 <style lang="scss" scoped>
 .zombie-popover {
   position: relative;
-
+  display: inline-block;
+  z-index: 0;
   .trigger {
     display: inline-block;
   }
@@ -140,7 +187,7 @@ export default {
 
 .content-wrapper {
   position: absolute;
-  z-index: 99;
+  z-index: 1;
   border: 1px solid #333;
   border-radius: 4px;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
@@ -150,6 +197,7 @@ export default {
   &:after {
     content: "";
     position: absolute;
+    z-index: -1;
     border: 11px solid transparent;
   }
   &:after {
