@@ -26,6 +26,10 @@
 <script>
 export default {
   name: "ZombiePopover",
+  model: {
+    prop: "value",
+    event: "popChange",
+  },
   props: {
     /**
      * 宽度
@@ -61,10 +65,14 @@ export default {
         return ["click", "hover"].indexOf(value) !== -1;
       },
     },
+    value: {
+      type: [Boolean, undefined],
+      default: undefined,
+    },
   },
   data() {
     return {
-      popoverShow: false,
+      popDisplay: false,
       positionOptions: {
         top: 0,
         left: 0,
@@ -84,6 +92,24 @@ export default {
     },
     closeEvent() {
       return this.trigger === "click" ? "" : "mouseleave";
+    },
+    popoverShow: {
+      get() {
+        return this.value !== undefined ? this.value : this.popDisplay;
+      },
+      set(val) {
+        this.value !== undefined
+          ? this.$emit("popChange", val)
+          : (this.popDisplay = val);
+      },
+    },
+  },
+  watch: {
+    value: {
+      handler(val) {
+        val && this.onShow();
+      },
+      immediate: true,
     },
   },
   methods: {
@@ -109,8 +135,8 @@ export default {
     },
     // 定位
     positionContent() {
-      document.body.appendChild(this.$refs.popoverContent);
       this.$nextTick(() => {
+        document.body.appendChild(this.$refs.popoverContent);
         let { width, height, top, left } =
           this.$refs.popoverTrigger.getBoundingClientRect();
         let { width: cwidth, height: cheight } =
@@ -149,14 +175,13 @@ export default {
       document.addEventListener("click", this.eventHandle);
     },
     eventHandle(e) {
-      console.log(!this.$refs.popoverWrap.contains(e.target));
       if (
         !this.$refs.popoverWrap.contains(e.target) ||
         !this.$refs.popoverWrap === e.target
       ) {
-        console.log(e, "eventHandle");
         if (
-          !this.$refs.popoverContent.contains(e.target) ||
+          (this.$refs.popoverContent &&
+            !this.$refs.popoverContent.contains(e.target)) ||
           !this.$refs.popoverContent === e.target
         ) {
           this.onClose();
@@ -166,10 +191,10 @@ export default {
     // 显示popover content
     onShow() {
       this.popoverShow = true;
-      this.$nextTick(() => {
+      if (this.popoverShow) {
         this.positionContent();
         this.listenToDocument();
-      });
+      }
     },
   },
 };
@@ -179,7 +204,7 @@ export default {
 .zombie-popover {
   position: relative;
   display: inline-block;
-  z-index: 0;
+  z-index: 2;
   .trigger {
     display: inline-block;
   }
@@ -197,7 +222,6 @@ export default {
   &:after {
     content: "";
     position: absolute;
-    z-index: -1;
     border: 11px solid transparent;
   }
   &:after {
