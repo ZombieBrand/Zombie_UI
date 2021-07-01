@@ -1,13 +1,25 @@
 <template>
   <div id="app">
-    <z-collapse>
-      <z-collapse-item title="标签1">
+    <z-collapse
+      v-model="active"
+      :accordion="false"
+    >
+      <z-collapse-item
+        title="标签1"
+        name="1"
+      >
         1
       </z-collapse-item>
-      <z-collapse-item title="标签2">
+      <z-collapse-item
+        title="标签2"
+        name="2"
+      >
         2
       </z-collapse-item>
-      <z-collapse-item title="标签3">
+      <z-collapse-item
+        title="标签3"
+        name="3"
+      >
         3
       </z-collapse-item>
     </z-collapse>
@@ -28,6 +40,7 @@ export default {
   data() {
     return {
       inputVal: "",
+      active:['1','3']
     };
   },
   methods: {
