@@ -13,10 +13,16 @@ export default {
     event: "changeSelect",
   },
   props: {
+    /**
+     * 是否只允许展开一个面板
+     */
     accordion: {
       type: Boolean,
       default: false,
     },
+    /**
+     * 选中展开name
+     */
     selected: {
       type: [String, Array],
       default: "",
@@ -43,4 +49,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+</style>

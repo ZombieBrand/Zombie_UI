@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <z-collapse
-      v-model="active"
       :accordion="false"
+      style="width: 400px"
     >
       <z-collapse-item
         title="标签1"
@@ -44,9 +44,7 @@ export default {
     };
   },
   methods: {
-    handleClick(){
 
-    }
   },
 };
 </script>

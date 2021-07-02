@@ -98,7 +98,6 @@ import StackAlt from './assets/stackalt.svg';
     margin-right: 10px;
     vertical-align: top;
   }
-
   .tip-wrapper {
     font-size: 13px;
     line-height: 20px;
@@ -115,8 +114,37 @@ import StackAlt from './assets/stackalt.svg';
 `}</style>
 
 # 欢迎使用Zombie UI
+[![Build Status](https://travis-ci.com/ZombieBrand/Zombie_UI.svg?branch=main)](https://travis-ci.com/ZombieBrand/Zombie_UI)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ZombieBrand/Zombie_UI)
+![npm](https://img.shields.io/npm/v/vue-zombie-ui)
+![NPM](https://img.shields.io/npm/l/vue-zombie-ui)
+![GitHub last commit](https://img.shields.io/github/last-commit/ZombieBrand/Zombie_UI)
+![Vue](https://img.shields.io/badge/Vue-2.x-brightgreen)
+![developer](https://img.shields.io/badge/developer-ZombieBrand-lightgrey)
+## 介绍
+ Zombie UI是个人UI库,会尽量保持更新！
+## 开始使用
+1. 安装 zombie ui
+`npm install --save vue-zombie-ui`
+2. 按需引入使用
+```js
+import { Button, ButtonGroup } from "vue-zombie-ui";
+import "vue-zombie-ui/dist/index.css";
 
-Zombie UI是个人UI库,会尽量保持更新！
+export default {
+  components: {
+    "z-button": Button,
+    "z-button-group": ButtonGroup
+  }
+};
+```
+```html
+ <z-button label="测试" type="danger" round :loading="true"></z-button>
+```
+3. Zombie UI内置使用vue2-transitions做为内置过渡效果
+```
+npm i vue2-transitions
+```
 <div className="tip-wrapper">
   <span className="tip">⚠️注意</span>文档预览组件参数含有v-model双向绑定预览数据不同步.这个问题还在解决中,实际项目中无问题.😭
 </div>
@@ -165,3 +193,5 @@ Zombie UI是个人UI库,会尽量保持更新！
     </span>
   </a>
 </div>
+
+## 变更记录

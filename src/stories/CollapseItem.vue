@@ -6,6 +6,8 @@
     >
       <slot name="header">
         {{ title }}
+      </slot>
+      <slot name="arrow">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-chevron-right"
@@ -27,15 +29,24 @@
         </svg>
       </slot>
     </div>
-    <div v-show="contentShow">
-      <slot />
-    </div>
+    <CollapseTransition>
+      <div
+        v-show="contentShow"
+        class="zombie-collapse-content"
+      >
+        <slot />
+      </div>
+    </CollapseTransition>
   </div>
 </template>
 
 <script>
+import { CollapseTransition } from "vue2-transitions";
 export default {
   name: "ZombieCollapseItem",
+  components: {
+    CollapseTransition,
+  },
   props: {
     title: {
       type: String,
@@ -53,12 +64,12 @@ export default {
     };
   },
   mounted() {
-    if(this.activeName.length > 0){
-      this.activeName.forEach(item=>{
-        this.name === item && this.open()
-      })
+    if (this.activeName.length > 0) {
+      this.activeName.forEach((item) => {
+        this.name === item && this.open();
+      });
     }
-    if(this.accordion){
+    if (this.accordion) {
       this.eventBus.$on("collapseSelected", (vm) => {
         if (vm !== this) {
           this.close();
@@ -75,22 +86,24 @@ export default {
       }
     },
     close() {
-      if(!this.accordion){
-        let index = this.activeName.findIndex(item=>{
-          return item === this.name
-        })
-        this.activeName.splice(index,1)
+      if (!this.accordion && this.activeName.length > 0) {
+        let index = this.activeName.findIndex((item) => {
+          return item === this.name;
+        });
+        this.activeName.splice(index, 1);
         this.changeSelect(this.activeName);
       }
       this.contentShow = false;
     },
     open() {
-      if(this.accordion){
+      if (this.accordion) {
         this.changeSelect(this.name);
-      }else{
-        this.activeName.every(item=>{
-          return item !== this.name
-        }) && this.activeName.push(this.name)
+      } else {
+        this.activeName.length > 0 &&
+          this.activeName.every((item) => {
+            return item !== this.name;
+          }) &&
+          this.activeName.push(this.name);
 
         this.changeSelect(this.activeName);
       }
@@ -104,17 +117,27 @@ export default {
 <style scoped lang="scss">
 @import "./styles/index";
 .zombie-collapse-item {
-  border-bottom: 1px solid $gray-400;
+  border-radius: 8px;
+  line-height: 26px;
+  box-shadow: rgba(59, 63, 73, 0.15) 1px 3px 9px 0;
+  transition: all 0.3s;
   .title {
+    padding-left: 8px;
     font-size: $font-size-base;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: nowrap;
     cursor: pointer;
     color: $gray-900;
+    background-color: #f5f8f9;
+    height: 50px;
     .icon-tabler-chevron-right {
       stroke: $gray-900;
     }
+  }
+  .zombie-collapse-content {
+    padding: 8px 4px;
   }
 }
 </style>
