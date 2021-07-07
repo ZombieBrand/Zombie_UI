@@ -33,7 +33,7 @@ export default {
             },
         },
         changeSelect:{
-            name:"null",
+            name:"无",
             table:{
                 category: "events",
             }

@@ -5,7 +5,7 @@
   >
     <slot />
     <div
-      v-if="collapsible"
+      v-if="collapsible !== undefined"
       class="collapsible-button"
       @click="toggleCollapsible"
     >
@@ -23,23 +23,18 @@ export default {
       default: 200,
     },
     collapsible: {
-      type: Boolean,
-      default: false,
+      type: [Boolean,undefined],
+      default: undefined,
     },
-  },
-  data() {
-    return {
-      collapsibleStatus: false,
-    };
   },
   computed: {
     collapsibleWidth() {
-      return this.collapsibleStatus ? "80px" : this.width + "px";
+      return this.collapsible ? "80px" : this.width + "px";
     },
   },
   methods: {
     toggleCollapsible() {
-      this.collapsibleStatus = !this.collapsibleStatus;
+      this.$emit('update:collapsible',!this.collapsible)
     },
   },
 };

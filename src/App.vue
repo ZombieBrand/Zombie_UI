@@ -1,50 +1,63 @@
 <template>
   <div id="app">
-    <z-collapse
-      :accordion="false"
-      style="width: 400px"
-    >
-      <z-collapse-item
-        title="标签1"
-        name="1"
-      >
-        1
-      </z-collapse-item>
-      <z-collapse-item
-        title="标签2"
-        name="2"
-      >
-        2
-      </z-collapse-item>
-      <z-collapse-item
-        title="标签3"
-        name="3"
-      >
-        3
-      </z-collapse-item>
-    </z-collapse>
+    <z-cascader
+      :options="dataOptions"
+      @onChange="onChange"
+    />
   </div>
 </template>
 
 <script>
-import ZInput from "./stories/Input";
-import ZButton from "./stories/Button";
-import ZCollapse from './stories/Collapse'
-import ZCollapseItem from './stories/CollapseItem'
+import ZCascader from './stories/Cascader'
 export default {
   name: "App",
   components: {
-    ZCollapse,
-    ZCollapseItem,
+    ZCascader
   },
   data() {
     return {
       inputVal: "",
-      active:['1','3']
+      active:['1','3'],
+      dataOptions:[{
+        value: 'zhinan',
+        label: '指南',
+        children: [{
+          value: 'shejiyuanze',
+          label: '设计原则',
+          children: [{
+            value: 'yizhi',
+            label: '一致'
+          }, {
+            value: 'fankui',
+            label: '反馈'
+          }, {
+            value: 'xiaolv',
+            label: '效率'
+          }, {
+            value: 'kekong',
+            label: '可控'
+          }]
+        }, {
+          value: 'daohang',
+          label: '导航',
+          children: [{
+            value: 'cexiangdaohang',
+            label: '侧向导航'
+          }, {
+            value: 'dingbudaohang',
+            label: '顶部导航'
+          }]
+        }]
+      },{
+        value:'ceshi',
+        label:'测试'
+      }]
     };
   },
   methods: {
+    onChange(){
 
+    }
   },
 };
 </script>

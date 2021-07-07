@@ -32,6 +32,26 @@ export default {
         },
       },
     },
+    popChange:{
+      name:"无",
+      table:{
+        category: "events",
+      }
+    },
+    content: {
+      name: "content",
+      description: "弹出内容插槽",
+      table: {
+        category: "slots",
+      },
+    },
+    default:{
+      name:'default',
+      description:"控制器插槽",
+      table: {
+        category: "slots",
+      },
+    },
   },
   component: ZPopover,
 };

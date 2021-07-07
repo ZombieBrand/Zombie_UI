@@ -67,7 +67,7 @@ export default {
       },
     },
     collapsible: {
-      name: "collapsible",
+      name: "collapsible.sync",
       description: "侧边栏是否开启",
       table: {
         category: "Aside Props",
@@ -90,7 +90,7 @@ const Template = (args, { argTypes }) => {
     props: Object.keys(argTypes),
     components: { ZContainer, ZHeader, ZMain, ZFooter },
     template:
-      "<z-container style='height:400px;min-width: 600px;'><z-header style='background: #5F192D'>header</z-header><z-main style='background: #E4D5A3'>main</z-main><z-footer style='background: #6F8A79'>footer</z-footer></z-container>",
+      "<z-container style='height:400px;min-width: 600px;color:white'><z-header style='background: #5F192D'>header</z-header><z-main style='background: #E4D5A3'>main</z-main><z-footer style='background: #6F8A79'>footer</z-footer></z-container>",
   };
 };
 
@@ -101,7 +101,7 @@ const AsideTemplate = (args, { argTypes }) => {
     props: Object.keys(argTypes),
     components: { ZContainer, ZHeader, ZMain, ZFooter, ZAside },
     template:
-      "<z-container style='height:400px;'><z-header :height='headerHeight' style='background: #5F192D'>header</z-header><z-container><z-aside :width='asideWidth' style='background: #596D79'>aside</z-aside><z-main style='background: #E4D5A3'>main</z-main></z-container><z-footer :height='footerHeight' style='background: #6F8A79'>footer</z-footer></z-container>",
+      "<z-container style='height:400px;color:white'><z-header :height='headerHeight' style='background: #5F192D'>header</z-header><z-container><z-aside :width='asideWidth' style='background: #596D79'>aside</z-aside><z-main style='background: #E4D5A3'>main</z-main></z-container><z-footer :height='footerHeight' style='background: #6F8A79'>footer</z-footer></z-container>",
   };
 };
 
@@ -123,11 +123,11 @@ const CollapsibleTemplate = (args, { argTypes }) => {
     props: Object.keys(argTypes),
     components: { ZContainer, ZHeader, ZMain, ZFooter, ZAside },
     template:
-      "<z-container style='height:400px'><z-aside :collapsible='collapsible' :width='200' style='background: #596D79'>aside</z-aside><z-container><z-header style='background: #5F192D'>header</z-header><z-main style='background: #E4D5A3'>main</z-main><z-footer style='background: #6F8A79'>footer</z-footer></z-container></z-container>",
+      "<z-container style='height:400px;color:white'><z-aside :collapsible.sync='collapsible' :width='200' style='background: #596D79'>aside</z-aside><z-container><z-header style='background: #5F192D'>header</z-header><z-main style='background: #E4D5A3'>main</z-main><z-footer style='background: #6F8A79'>footer</z-footer></z-container></z-container>",
   };
 };
 
 export const Collapsible = CollapsibleTemplate.bind({});
 Collapsible.args = {
-  collapsible: true,
+  collapsible:false,
 };

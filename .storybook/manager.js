@@ -5,5 +5,7 @@ import yourTheme from './YourTheme';
 
 addons.setConfig({
     theme: yourTheme,
+    toolbar:{
+        canvas:false
+    }
 });
-
