@@ -1,14 +1,20 @@
 <template>
-  <div class="zombie-cascader">
+  <div
+    ref="cascader"
+    class="zombie-cascader"
+  >
     <div class="trigger">
       <z-input
         ref="trigger"
         style="width:400px"
-        @onFocus="handleClick"
+        :value="selectLabel"
+        :readonly="true"
+        @onFocus="handleClick($event)"
       />
     </div>
     <z-cascader-item
       v-if="show"
+      :level="level + 1"
       :child-data="options"
       :style="{top:popoverTopStyle}"
       class="popover"
@@ -36,19 +42,56 @@ export default {
   data() {
     return {
       show: false,
-      popoverTop: 0
+      popoverTop: 0,
+      level: 0,
+      selectNode:[],
     }
   },
   computed: {
     popoverTopStyle() {
       return this.popoverTop + 'px'
+    },
+    selectLabel(){
+      let labelArr = this.selectNode.map(item=>{
+        return item.label
+      })
+      return labelArr.join('>')
+    }
+  },
+  provide(){
+    return {
+      onClose:this.onClose,
+      selectNode:this.selectNode
     }
   },
   methods: {
     handleClick() {
       let nodeStyle = this.$refs.trigger.$el.getBoundingClientRect()
       this.popoverTop = nodeStyle.height
-      this.show = !this.show
+      if (this.show) {
+        this.onClose()
+      } else {
+        this.onOpen()
+      }
+    },
+    // 添加关闭监听
+    listenToDocument() {
+      document.addEventListener("click", this.eventHandle);
+    },
+    eventHandle(evt) {
+      this.$nextTick(() => {
+        let target = evt.target
+        let contain = this.$refs.cascader
+        !contain.contains(target) && this.onClose()
+      })
+    },
+    onClose() {
+      this.show = false
+      document.removeEventListener("click", this.eventHandle);
+    },
+    onOpen() {
+      this.show = true
+      this.listenToDocument()
     }
   }
 };
@@ -59,7 +102,9 @@ export default {
 
 .zombie-cascader {
   position: relative;
-
+  .trigger{
+    display: inline-block;
+  }
   .popover {
     position: absolute;
     left: 0;

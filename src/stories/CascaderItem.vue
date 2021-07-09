@@ -37,6 +37,7 @@
     <ZombieCascaderItem
       v-if="childrenShow && childrenOptions && childrenOptions.length > 0"
       :child-data="childrenOptions"
+      :level="level + 1"
     />
   </div>
 </template>
@@ -49,7 +50,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    level:{
+      type: Number,
+      default:0
+    }
   },
+  inject:['onClose','selectNode'],
   data() {
     return {
       childrenShow: false,
@@ -72,13 +78,15 @@ export default {
       this.selectedNode = node;
       this.selectedIndex = index;
       this.childrenShow = true;
+      this.$set(this.selectNode,this.level - 1,node)
+      this.childrenOptions.length === 0 && this.onClose()
     },
     reset() {
       this.childrenShow = false;
       this.selectedNode = null;
       this.isSelected = false;
       this.selectedIndex = null;
-    },
+    }
   },
 };
 </script>
