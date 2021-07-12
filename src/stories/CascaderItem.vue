@@ -11,7 +11,10 @@
         <span class="popover-label">
           {{ item.label }}
         </span>
-        <div v-if="item.children && item.children.length > 0">
+        <div
+          v-if="item.children && item.children.length > 0"
+          class="cascader-icon"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-chevron-right"
@@ -50,12 +53,12 @@ export default {
       type: Array,
       default: () => [],
     },
-    level:{
+    level: {
       type: Number,
-      default:0
+      default: 0,
     }
   },
-  inject:['onClose','selectNode'],
+  inject: ["onClose", "selectNode"],
   data() {
     return {
       childrenShow: false,
@@ -67,10 +70,10 @@ export default {
   computed: {
     childrenOptions() {
       return this.selectedNode.children ? this.selectedNode.children : [];
-    },
+    }
   },
   mounted() {
-    this.reset()
+    this.reset();
   },
   methods: {
     handleClick(node, index) {
@@ -78,15 +81,15 @@ export default {
       this.selectedNode = node;
       this.selectedIndex = index;
       this.childrenShow = true;
-      this.$set(this.selectNode,this.level - 1,node)
-      this.childrenOptions.length === 0 && this.onClose()
+      this.$set(this.selectNode, this.level - 1, node);
+      this.childrenOptions.length === 0 && this.onClose();
     },
     reset() {
       this.childrenShow = false;
       this.selectedNode = null;
       this.isSelected = false;
       this.selectedIndex = null;
-    }
+    },
   },
 };
 </script>
@@ -105,7 +108,6 @@ export default {
     overflow-y: auto;
     .popover-item {
       background: transparent;
-      min-width: 150px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -117,7 +119,11 @@ export default {
         background: $gray-200;
       }
       .popover-label {
-        padding: 0 10px;
+        padding: 0 20px;
+        white-space: nowrap;
+      }
+      .cascader-icon {
+        padding: 0 10px 0 20px;
       }
     }
   }

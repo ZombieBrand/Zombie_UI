@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <z-cascader
+      v-model="inputVal"
       :options="dataOptions"
+      :loading="loading"
       @onChange="onChange"
     />
   </div>
@@ -16,7 +18,8 @@ export default {
   },
   data() {
     return {
-      inputVal: "",
+      loading:false,
+      inputVal: [],
       active:['1','3'],
       dataOptions:[{
         value: 'zhinan',

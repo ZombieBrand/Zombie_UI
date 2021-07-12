@@ -1,6 +1,5 @@
 <template>
   <div :class="classes">
-    <!--    <div class="zombie-input-group-prepend">1</div>-->
     <div class="icon-wrapper">
       <z-icon
         v-show="status === 'success'"
@@ -13,7 +12,7 @@
         class="error-icon"
       />
     </div>
-    <label style="width: 100%">
+    <label style="width: 100%;margin:0">
       <input
         class="zombie-input-inner"
         :class="inputState"
@@ -30,7 +29,13 @@
         <span class="error-message">{{ errorMessage }}</span>
       </template>
     </label>
-    <!--    <div class="zombie-input-group-append">2</div>-->
+    <div class="suffix">
+      <slot name="suffix" />
+      <div
+        v-show="loading"
+        class="loading"
+      />
+    </div>
   </div>
 </template>
 
@@ -95,6 +100,13 @@ export default {
       type: String,
       default: "输入的内容错误",
     },
+     /**
+     * 加载状态
+     */
+    loading:{
+      type:Boolean,
+      default:false
+    },
   },
   computed: {
     classes() {
@@ -130,4 +142,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "./input.scss";
+.loading {
+  border: 3px solid $gray-600;
+  border-top-color: $gray-400;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 </style>

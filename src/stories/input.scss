@@ -41,10 +41,19 @@
   }
   .error-message {
     position: absolute;
-    bottom:0;
-    left:0;
+    bottom: 0;
+    left: 0;
     transform: translateY(90%);
     color: $danger;
+  }
+  .suffix {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right:2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -103,14 +112,15 @@
 
   &:disabled,
   &[readonly] {
-    background-color: $input-disabled-bg;
-    border-color: $input-disabled-border-color;
     // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+    cursor: pointer;
     opacity: 1;
-    cursor: not-allowed;
   }
   &:disabled {
     opacity: 0.8;
+    background-color: $input-disabled-bg;
+    border-color: $input-disabled-border-color;
+    cursor: not-allowed;
   }
 }
 
