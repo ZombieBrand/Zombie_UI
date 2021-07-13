@@ -3,8 +3,9 @@
     <z-cascader
       v-model="inputVal"
       :options="dataOptions"
-      :loading="loading"
+      :on-load="handleLoad"
       @onChange="onChange"
+      remote
     />
   </div>
 </template>
@@ -59,6 +60,16 @@ export default {
   },
   methods: {
     onChange(){
+
+    },
+    handleLoad (option) {
+      return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          option.children = [{label:'test',value:'test'}]
+          console.log(option)
+          resolve()
+        },1000)
+      })
 
     }
   },

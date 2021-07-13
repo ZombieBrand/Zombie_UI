@@ -11,7 +11,6 @@
         ref="trigger"
         :value="selectLabel"
         :readonly="true"
-        :loading="loading"  
       >
         <template v-slot:suffix>
           <svg
@@ -49,8 +48,8 @@
 </template>
 
 <script>
-import ZCascaderItem from "@/stories/CascaderItem";
-import ZInput from "@/stories/Input";
+import ZCascaderItem from "./CascaderItem";
+import ZInput from "./Input";
 
 export default {
   name: "ZombieCascader",
@@ -63,19 +62,43 @@ export default {
     event: "selected",
   },
   props: {
+    /**
+     * 填充的 options 数据
+     */
     options: {
       type: Array,
       default: () => [],
       required: true,
     },
+    /**
+     *  绑定的值value
+     */
     value: {
       type: Array,
       default: () => [],
     },
-    loading: {
-      type: Boolean,
-      default: false,
+    /**
+     * 在点击未加载完成节点时的回调，在返回的 promise 中设定 option.children，在返回的 promise resolve 或 reject 之后完成加载
+     * 需要remote是true有效
+     */
+    onLoad:{
+      type:Function,
+      default: undefined
     },
+    /**
+     * 是否远程获取数据
+     */
+    remote:{
+      type:Boolean,
+      default:false
+    },
+    /**
+     * 设置分隔符
+     */
+    separator:{
+      type:String,
+      default:'/'
+    }
   },
   data() {
     return {
@@ -98,18 +121,19 @@ export default {
         .map((item) => {
           return item.label;
         })
-        .join(">");
+        .join(` ${this.separator} `);
     },
   },
   provide() {
     return {
       onClose: this.onClose,
       selectNode: this.selectNode,
+      remote:this.remote,
+      onLoad:this.onLoad
     };
   },
   methods: {
     handleClick() {
-      console.log(1)
       let nodeStyle = this.$refs.trigger.$el.getBoundingClientRect();
       this.popoverTop = nodeStyle.height;
       if (this.show) {
@@ -162,7 +186,8 @@ export default {
   .popover {
     position: absolute;
     left: 0;
-    box-shadow: $box-shadow;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 6px rgba(0,0,0,.3));
     border-radius: $border-radius;
     background: $white;
     overflow: hidden;

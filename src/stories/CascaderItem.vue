@@ -12,7 +12,7 @@
           {{ item.label }}
         </span>
         <div
-          v-if="item.children && item.children.length > 0"
+          v-show="item.children && item.children.length > 0 && !loading"
           class="cascader-icon"
         >
           <svg
@@ -35,6 +35,10 @@
             <polyline points="9 6 15 12 9 18" />
           </svg>
         </div>
+        <div
+          v-show="loading && index === selectedIndex"
+          class="loading"
+        />
       </div>
     </div>
     <ZombieCascaderItem
@@ -56,21 +60,22 @@ export default {
     level: {
       type: Number,
       default: 0,
-    }
+    },
   },
-  inject: ["onClose", "selectNode"],
+  inject: ["onClose", "selectNode","remote","onLoad"],
   data() {
     return {
       childrenShow: false,
       selectedNode: null,
       isSelected: false,
       selectedIndex: null,
+      loading: false
     };
   },
   computed: {
     childrenOptions() {
       return this.selectedNode.children ? this.selectedNode.children : [];
-    }
+    },
   },
   mounted() {
     this.reset();
@@ -80,15 +85,27 @@ export default {
       this.isSelected = true;
       this.selectedNode = node;
       this.selectedIndex = index;
-      this.childrenShow = true;
       this.$set(this.selectNode, this.level - 1, node);
-      this.childrenOptions.length === 0 && this.onClose();
+      if(this.remote === false){
+        this.childrenShow = true;
+        this.childrenOptions.length === 0 && this.onClose();
+      }else{
+        this.loading = true
+        this.childrenShow = false
+        this.$delete(node,'children')
+        this.onLoad(node).finally(()=>{
+          this.loading = false
+          this.childrenShow = true
+          this.childrenOptions.length === 0 && this.onClose();
+        })
+      }
     },
     reset() {
       this.childrenShow = false;
       this.selectedNode = null;
       this.isSelected = false;
       this.selectedIndex = null;
+      this.loading = false
     },
   },
 };
@@ -112,6 +129,8 @@ export default {
       align-items: center;
       justify-content: space-between;
       transition: all 0.2s linear;
+      padding-left:10px;
+      padding-right: 4px;
       &:hover {
         background: $gray-200;
       }
@@ -119,11 +138,23 @@ export default {
         background: $gray-200;
       }
       .popover-label {
-        padding: 0 20px;
+        padding-right:30px;
         white-space: nowrap;
       }
       .cascader-icon {
-        padding: 0 10px 0 20px;
+      }
+      .loading {
+        border: 3px solid $gray-600;
+        border-top-color: $gray-400;
+        border-radius: 50%;
+        width: 1em;
+        height: 1em;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
     }
   }
