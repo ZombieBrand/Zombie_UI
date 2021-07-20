@@ -1,77 +1,44 @@
 <template>
   <div id="app">
-    <z-cascader
-      v-model="inputVal"
-      :options="dataOptions"
-      :on-load="handleLoad"
-      @onChange="onChange"
-      remote
-    />
+    <z-carousel style="transform: translateX(100%)">
+      <z-carousel-item name="1">
+        <div class="box">
+          1
+        </div>
+      </z-carousel-item>
+      <z-carousel-item name="2">
+        <div class="box2">
+          2
+        </div>
+      </z-carousel-item>
+    </z-carousel>
   </div>
 </template>
 
 <script>
-import ZCascader from './stories/Cascader'
+import ZCarousel from './stories/Carousel'
+import ZCarouselItem from './stories/CarouselItem'
 export default {
   name: "App",
   components: {
-    ZCascader
+    ZCarousel,
+    ZCarouselItem
   },
   data() {
-    return {
-      loading:false,
-      inputVal: [],
-      active:['1','3'],
-      dataOptions:[{
-        value: 'zhinan',
-        label: '指南',
-        children: [{
-          value: 'shejiyuanze',
-          label: '设计原则',
-          children: [{
-            value: 'yizhi',
-            label: '一致'
-          }, {
-            value: 'fankui',
-            label: '反馈'
-          }, {
-            value: 'xiaolv',
-            label: '效率'
-          }, {
-            value: 'kekong',
-            label: '可控'
-          }]
-        }, {
-          value: 'daohang',
-          label: '导航',
-          children: [{
-            value: 'cexiangdaohang',
-            label: '侧向导航'
-          }, {
-            value: 'dingbudaohang',
-            label: '顶部导航'
-          }]
-        }]
-      },{
-        value:'ceshi',
-        label:'测试'
-      }]
-    };
+    return {}
   },
-  methods: {
-    onChange(){
-
-    },
-    handleLoad (option) {
-      return new Promise((resolve, reject) => {
-        setTimeout(()=>{
-          option.children = [{label:'test',value:'test'}]
-          console.log(option)
-          resolve()
-        },1000)
-      })
-
-    }
-  },
+  methods: {},
 };
 </script>
+<style lang="scss" scoped>
+  .box{
+    width:100px;
+    height:100px;
+    background-color: red;
+  }
+  .box2{
+    width:100px;
+    height:100px;
+    background-color: blue;
+  }
+</style>
