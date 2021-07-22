@@ -50,7 +50,7 @@
 <script>
 import ZCascaderItem from "./CascaderItem";
 import ZInput from "./Input";
-import {mutations} from "@/stories/store/cascader"
+import {mutations} from "./store/cascader"
 export default {
   name: "ZombieCascader",
   components: {

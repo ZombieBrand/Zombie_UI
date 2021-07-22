@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {store} from "@/stories/store/cascader"
+import {store} from "./store/cascader"
 export default {
   name: "ZombieCascaderItem",
   props: {

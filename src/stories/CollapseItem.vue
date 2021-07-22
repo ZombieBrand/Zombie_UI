@@ -47,7 +47,7 @@
 
 <script>
 import { CollapseTransition } from "vue2-transitions";
-import {store,mutations} from "@/stories/store/collapse";
+import {store,mutations} from "./store/collapse";
 export default {
   name: "ZombieCollapseItem",
   components: {

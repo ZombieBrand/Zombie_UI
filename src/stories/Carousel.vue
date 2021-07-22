@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {store,mutations} from "@/stories/store/carousel";
+import {store,mutations} from "./store/carousel";
 
 export default {
   name: "ZombieCarousel",

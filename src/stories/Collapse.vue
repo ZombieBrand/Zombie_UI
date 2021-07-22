@@ -6,7 +6,7 @@
 
 <script>
 import Vue from "vue";
-import {mutations} from "@/stories/store/collapse";
+import {mutations} from "./store/collapse";
 
 export default {
   name: "ZombieCollapse",
