@@ -7,27 +7,30 @@
 </template>
 
 <script>
+import {store,mutations} from "@/stories/store/carousel";
+
 export default {
   name: "ZombieCarousel",
   props:{
     selected:{
       type:String,
       default:''
+    },
+    initialIndex:{
+      type:Number,
+      default:0
     }
   },
-  data(){
-    return{
+  computed:{
+    selectName(){
+      mutations.setSelected(this.selected)
+      return store.selected
     }
   },
   mounted() {
-    let first = this.$children[0]
-    let second = this.$children[1]
-    first.visible = true
-    setTimeout(()=>{
-      first.visible = false
-      second.visible = true
-    },1000)
-  }
+    let initialItem = this.$children[this.initialIndex]
+    initialItem.visible = true
+  },
 }
 </script>
 
@@ -36,7 +39,6 @@ export default {
     display: inline-block;
     &-window{
       position: relative;
-      display: flex;
     }
   }
 </style>

@@ -47,6 +47,7 @@
 
 <script>
 import { CollapseTransition } from "vue2-transitions";
+import {store,mutations} from "@/stories/store/collapse";
 export default {
   name: "ZombieCollapseItem",
   components: {
@@ -62,11 +63,19 @@ export default {
       default: "",
     },
   },
-  inject: ["eventBus", "activeName", "changeSelect", "accordion"],
+  inject: ["eventBus", "changeSelect"],
   data() {
     return {
       contentShow: false,
     };
+  },
+  computed:{
+    activeName(){
+      return store.selected
+    },
+    accordion(){
+      return store.accordion
+    }
   },
   mounted() {
     if (this.activeName.length > 0) {

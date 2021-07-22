@@ -50,7 +50,7 @@
 <script>
 import ZCascaderItem from "./CascaderItem";
 import ZInput from "./Input";
-
+import {mutations} from "@/stories/store/cascader"
 export default {
   name: "ZombieCascader",
   components: {
@@ -105,7 +105,6 @@ export default {
       show: false,
       popoverTop: 0,
       level: 0,
-      selectNode: [],
     };
   },
   computed: {
@@ -124,12 +123,19 @@ export default {
         .join(` ${this.separator} `);
     },
   },
+  watch:{
+    remote:{
+      handler(val){
+        mutations.setRemote(val)
+      },
+      immediate:true
+    }
+  },
   provide() {
     return {
       onClose: this.onClose,
       selectNode: this.selectNode,
-      remote:this.remote,
-      onLoad:this.onLoad
+      onLoad: this.onLoad
     };
   },
   methods: {

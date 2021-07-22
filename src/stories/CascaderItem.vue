@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import {store} from "@/stories/store/cascader"
 export default {
   name: "ZombieCascaderItem",
   props: {
@@ -62,7 +63,7 @@ export default {
       default: 0,
     },
   },
-  inject: ["onClose", "selectNode","remote","onLoad"],
+  inject: ["onClose", "selectNode","onLoad"],
   data() {
     return {
       childrenShow: false,
@@ -76,6 +77,9 @@ export default {
     childrenOptions() {
       return this.selectedNode.children ? this.selectedNode.children : [];
     },
+    remote(){
+      return store.remote
+    }
   },
   mounted() {
     this.reset();

@@ -6,6 +6,8 @@
 
 <script>
 import Vue from "vue";
+import {mutations} from "@/stories/store/collapse";
+
 export default {
   name: "ZombieCollapse",
   model: {
@@ -33,6 +35,20 @@ export default {
       eventBus: new Vue(),
     };
   },
+  watch:{
+    selected:{
+      handler(val){
+        mutations.setSelected(val)
+      },
+      immediate:true
+    },
+    accordion:{
+      handler(val){
+        mutations.setAccordion(val)
+      },
+      immediate:true
+    },
+  },
   methods: {
     changeSelect(name) {
       this.$emit("changeSelect", name);
@@ -42,8 +58,6 @@ export default {
     return {
       eventBus: this.eventBus,
       changeSelect: this.changeSelect,
-      activeName: this.selected,
-      accordion: this.accordion,
     };
   },
 };

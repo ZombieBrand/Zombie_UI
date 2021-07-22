@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <div
-      v-show="visible"
+      v-show="show"
       class="zombie-carousel-item"
     >
       <slot />
@@ -10,33 +10,45 @@
 </template>
 
 <script>
+import {store} from "@/stories/store/carousel";
 export default {
   name: "CarouselItem",
   props: {
     name: {
       type: String,
-      required: true,
-    },
+      default:''
+    }
   },
   data() {
     return {
       visible: false,
     };
   },
-  mounted() {},
+  computed:{
+    selectName(){
+      return store.selected
+    },
+    show(){
+      if(this.name){
+        return this.name === this.selectName
+      }else{
+        return this.visible
+      }
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 .zombie-carousel-item {
+  .slide-enter-active,
+  .slide-leave-active {
+    transition: all 2s;
+  }
   .slide-leave-active {
     position: absolute;
     top: 0;
     left: 0;
-  }
-  .slide-enter-active,
-  .slide-leave-active {
-    transition: all 2s;
   }
   .slide-enter {
     transform: translateX(100%);

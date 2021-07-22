@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <z-carousel style="transform: translateX(100%)">
+    <z-carousel :selected="selected">
       <z-carousel-item name="1">
         <div class="box">
           1
@@ -25,7 +25,9 @@ export default {
     ZCarouselItem
   },
   data() {
-    return {}
+    return {
+      selected: '2'
+    }
   },
   methods: {},
 };
