@@ -26,10 +26,17 @@ export default {
   },
   data() {
     return {
-      selected: '2'
+      selected: '1'
     }
   },
-  methods: {},
+  methods: {
+
+  },
+  mounted() {
+    setTimeout(()=>{
+      this.selected = '2'
+    },2000)
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -29,11 +29,7 @@ export default {
       return store.selected
     },
     show(){
-      if(this.name){
-        return this.name === this.selectName
-      }else{
-        return this.visible
-      }
+      return this.visible || this.name === this.selectName
     }
   }
 };
@@ -43,7 +39,7 @@ export default {
 .zombie-carousel-item {
   .slide-enter-active,
   .slide-leave-active {
-    transition: all 2s;
+    transition: all .3s;
   }
   .slide-leave-active {
     position: absolute;

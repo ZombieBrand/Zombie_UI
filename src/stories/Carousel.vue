@@ -1,7 +1,9 @@
 <template>
   <div class="zombie-carousel">
     <div class="zombie-carousel-window">
-      <slot />
+      <div class="zombie-carousel-wrapper">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +39,7 @@ export default {
 <style lang="scss" scoped>
   .zombie-carousel{
     display: inline-block;
-    &-window{
+    &-wrapper{
       position: relative;
     }
   }

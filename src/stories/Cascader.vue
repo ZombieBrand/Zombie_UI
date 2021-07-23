@@ -105,6 +105,7 @@ export default {
       show: false,
       popoverTop: 0,
       level: 0,
+      selectNode:[]
     };
   },
   computed: {
