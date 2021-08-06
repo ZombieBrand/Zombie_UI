@@ -15,8 +15,8 @@ export default {
   name: "CarouselItem",
   props: {
     name: {
-      type: String,
-      default:''
+      type: [String,Date],
+      default: ()=> new Date()
     }
   },
   data() {

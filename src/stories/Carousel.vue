@@ -21,6 +21,10 @@ export default {
     initialIndex:{
       type:Number,
       default:0
+    },
+    autoplay:{
+      type: Boolean,
+      default: true
     }
   },
   computed:{
@@ -32,6 +36,15 @@ export default {
   mounted() {
     let initialItem = this.$children[this.initialIndex]
     initialItem.visible = true
+  },
+  methods:{
+    autoPlay(){
+
+    },
+    getSelected(initialIndex){
+      let initialItem = this.$children[initialIndex]
+      initialItem.visible = true
+    }
   },
 }
 </script>

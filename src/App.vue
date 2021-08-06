@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <z-carousel :selected="selected">
-      <z-carousel-item name="1">
+    <z-carousel >
+      <z-carousel-item >
         <div class="box">
           1
         </div>
       </z-carousel-item>
-      <z-carousel-item name="2">
+      <z-carousel-item >
         <div class="box2">
           2
         </div>
