@@ -55,8 +55,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.zombie-carousel-item {
-}
 .slide-leave-active {
   position: absolute;
   left: 0;

@@ -16,7 +16,6 @@
     </div>
     <div class="zombie-carousel-dots">
       <span
-        data-action="prev"
         @click="onClickPrev"
       >
         <z-icon name="left" />
@@ -25,13 +24,11 @@
         v-for="n in childrenLength"
         :key="n"
         :class="{ active: selectedIndex === n - 1 }"
-        :data-index="n - 1"
         @click="select(n - 1)"
       >
         {{ n }}
       </span>
       <span
-        data-action="next"
         @click="onClickNext"
       >
         <z-icon name="right" />
@@ -74,7 +71,7 @@ export default {
   },
   computed: {
     selectedIndex() {
-      let index = this.names.indexOf(this.selected);
+      let index = this.names.indexOf(this.selected)
       return index === -1 ? 0 : index;
     },
     names() {
