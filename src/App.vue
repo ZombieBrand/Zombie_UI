@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <z-carousel >
-      <z-carousel-item >
+    <z-carousel v-model="selected">
+      <z-carousel-item name="1">
         <div class="box">
           1
         </div>
       </z-carousel-item>
-      <z-carousel-item >
+      <z-carousel-item name="2">
         <div class="box2">
           2
+        </div>
+      </z-carousel-item>
+      <z-carousel-item name="3">
+        <div class="box3">
+          3
         </div>
       </z-carousel-item>
     </z-carousel>
@@ -29,25 +34,27 @@ export default {
       selected: '1'
     }
   },
-  methods: {
-
-  },
   mounted() {
     setTimeout(()=>{
       this.selected = '2'
     },2000)
+  },
+  methods: {
+
   }
 };
 </script>
 <style lang="scss" scoped>
-  .box{
-    width:100px;
-    height:100px;
-    background-color: red;
-  }
-  .box2{
-    width:100px;
-    height:100px;
-    background-color: blue;
-  }
+.box{
+  height:300px;
+  background-color: red;
+}
+.box2{
+  height:300px;
+  background-color: blue;
+}
+.box3{
+  height:300px;
+  background-color: greenyellow;
+}
 </style>

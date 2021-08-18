@@ -1,56 +1,83 @@
 <template>
-  <transition name="slide">
-    <div
-      v-show="show"
-      class="zombie-carousel-item"
-    >
-      <slot />
-    </div>
-  </transition>
+  <div>
+    <template v-if="animationEnabled">
+      <transition name="slide">
+        <div
+          v-if="visible"
+          class="zombie-carousel-item"
+          :class="{ reverse }"
+        >
+          <slot />
+        </div>
+      </transition>
+    </template>
+    <template v-else>
+      <div
+        v-if="visible"
+        class="zombie-carousel-item"
+        :class="{ reverse }"
+      >
+        <slot />
+      </div>
+    </template>
+  </div>
 </template>
-
 <script>
-import {store} from "./store/carousel";
+import {store} from "@/stories/store/carousel";
+
 export default {
-  name: "CarouselItem",
+  name: "ZombieCarouselItem",
   props: {
     name: {
-      type: [String,Date],
-      default: ()=> new Date()
-    }
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
-      visible: false,
+      animationEnabled: false,
     };
   },
-  computed:{
-    selectName(){
+  computed: {
+    visible() {
+      return this.selected === this.name;
+    },
+    selected(){
       return store.selected
     },
-    show(){
-      return this.visible || this.name === this.selectName
+    reverse(){
+      return store.reverse
     }
-  }
+  },
+  updated() {
+    this.animationEnabled = true;
+  },
 };
 </script>
-
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .zombie-carousel-item {
-  .slide-enter-active,
-  .slide-leave-active {
-    transition: all .3s;
-  }
-  .slide-leave-active {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .slide-enter {
-    transform: translateX(100%);
-  }
-  .slide-leave-to {
-    transform: translateX(-100%);
-  }
+}
+.slide-leave-active {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s;
+}
+.slide-enter {
+  transform: translateX(100%);
+}
+.slide-enter.reverse {
+  transform: translateX(-100%);
+}
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+.slide-leave-to.reverse {
+  transform: translateX(100%);
 }
 </style>
