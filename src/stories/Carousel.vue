@@ -38,7 +38,7 @@
 </template>
 <script>
 import ZIcon from "./Icon";
-import { mutations } from "@/stories/store/carousel";
+import { mutations } from "./store/carousel";
 
 export default {
   name: "ZombieCarousel",
@@ -101,7 +101,7 @@ export default {
       this.pause();
     },
     onMouseLeave() {
-      this.playAutomatically();
+      this.autoPlay && this.playAutomatically();
     },
     onTouchStart(e) {
       this.pause();
@@ -125,7 +125,7 @@ export default {
         }
       }
       this.$nextTick(() => {
-        this.playAutomatically();
+        this.autoPlay && this.playAutomatically();
       });
     },
     onClickPrev() {

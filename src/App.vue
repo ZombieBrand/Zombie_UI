@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <z-carousel v-model="selected">
+    <z-carousel
+      v-model="selected"
+      :auto-play="false"
+    >
       <z-carousel-item name="1">
         <div class="box">
           1

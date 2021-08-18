@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import {store} from "@/stories/store/carousel";
+import {store} from "./store/carousel";
 
 export default {
   name: "ZombieCarouselItem",
