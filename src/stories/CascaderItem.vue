@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import {store} from "./store/cascader"
 export default {
   name: "ZombieCascaderItem",
   props: {
@@ -70,16 +69,14 @@ export default {
       selectedNode: null,
       isSelected: false,
       selectedIndex: null,
-      loading: false
+      loading: false,
+      remote: false
     };
   },
   computed: {
     childrenOptions() {
       return this.selectedNode.children ? this.selectedNode.children : [];
     },
-    remote(){
-      return store.remote
-    }
   },
   mounted() {
     this.reset();

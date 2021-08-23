@@ -1,63 +1,55 @@
 <template>
   <div id="app">
-    <z-carousel
+    <z-menu
       v-model="selected"
-      :auto-play="false"
+      multiline
     >
-      <z-carousel-item name="1">
-        <div class="box">
-          1
-        </div>
-      </z-carousel-item>
-      <z-carousel-item name="2">
-        <div class="box2">
-          2
-        </div>
-      </z-carousel-item>
-      <z-carousel-item name="3">
-        <div class="box3">
-          3
-        </div>
-      </z-carousel-item>
-    </z-carousel>
+      <z-menu-item name="home">
+        首页
+      </z-menu-item>
+      <z-menu-item name="about">
+        关于
+      </z-menu-item>
+      <z-menu-item name="hire">
+        招聘
+      </z-menu-item>
+    </z-menu>
+    <z-menu
+      v-model="selected2"
+    >
+      <z-menu-item name="home1">
+        首页
+      </z-menu-item>
+      <z-menu-item name="about1">
+        关于
+      </z-menu-item>
+      <z-menu-item name="hire1">
+        招聘
+      </z-menu-item>
+    </z-menu>
   </div>
 </template>
 
 <script>
-import ZCarousel from './stories/Carousel'
-import ZCarouselItem from './stories/CarouselItem'
+import ZMenu from "@/stories/Menu";
+import ZMenuSub from "@/stories/MenuSub";
+import ZMenuItem from "@/stories/MenuItem";
+import Collapse from "@/stories/Collapse";
+import CollapseItem from "@/stories/CollapseItem";
+
 export default {
   name: "App",
   components: {
-    ZCarousel,
-    ZCarouselItem
+    ZMenu,
+    ZMenuItem,
+    ZMenuSub,
   },
   data() {
     return {
-      selected: '1'
-    }
+      selected: ['home'],
+      selected2: ['about1'],
+    };
   },
-  mounted() {
-    setTimeout(()=>{
-      this.selected = '2'
-    },2000)
-  },
-  methods: {
-
-  }
 };
 </script>
-<style lang="scss" scoped>
-.box{
-  height:300px;
-  background-color: red;
-}
-.box2{
-  height:300px;
-  background-color: blue;
-}
-.box3{
-  height:300px;
-  background-color: greenyellow;
-}
-</style>
+<style lang="scss" scoped></style>

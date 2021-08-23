@@ -14,8 +14,19 @@ export default {
     component: ZCarouselItem,
     argTypes: {
         selected:{
-            name:"selected",
             description: "支持v-model方法",
+        },
+        autoPlay:{
+            description: "是否启用自动轮播",
+            defaultValue: {
+                summary: "true",
+            },
+        },
+        autoPlayDelay:{
+            description: "自动轮播间隔时间（毫秒）",
+            defaultValue: {
+                summary: "3000",
+            },
         },
         name:{
             name:"name",

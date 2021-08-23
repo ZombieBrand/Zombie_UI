@@ -23,8 +23,6 @@
   </div>
 </template>
 <script>
-import {store} from "./store/carousel";
-
 export default {
   name: "ZombieCarouselItem",
   props: {
@@ -35,6 +33,8 @@ export default {
   },
   data() {
     return {
+      selected: undefined,
+      reverse: false,
       animationEnabled: false,
     };
   },
@@ -42,12 +42,6 @@ export default {
     visible() {
       return this.selected === this.name;
     },
-    selected(){
-      return store.selected
-    },
-    reverse(){
-      return store.reverse
-    }
   },
   updated() {
     this.animationEnabled = true;
@@ -55,6 +49,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.zombie-carousel-item {
+}
 .slide-leave-active {
   position: absolute;
   left: 0;

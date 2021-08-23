@@ -9,25 +9,25 @@
       </slot>
       <slot name="arrow">
         <div
-          :class="{open:contentShow,close:!contentShow}"
+          :class="{ open: contentShow, close: !contentShow }"
           class="arrow-wrap"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-chevron-right"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#fd0061"
             fill="none"
+            height="22"
+            stroke="#fd0061"
             stroke-linecap="round"
             stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="22"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke="none"
               d="M0 0h24v24H0z"
               fill="none"
+              stroke="none"
             />
             <polyline points="9 6 15 12 9 18" />
           </svg>
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { CollapseTransition } from "vue2-transitions";
-import {store} from "./store/collapse";
+import {CollapseTransition} from "vue2-transitions";
+
 export default {
   name: "ZombieCollapseItem",
   components: {
@@ -67,31 +67,34 @@ export default {
   data() {
     return {
       contentShow: false,
+      selected: "",
+      accordion: false,
+      activeName: ''
     };
   },
-  computed:{
-    activeName(){
-      return store.selected
-    },
-    accordion(){
-      return store.accordion
-    }
-  },
-  mounted() {
-    if (this.activeName.length > 0) {
-      this.activeName.forEach((item) => {
-        this.name === item && this.open();
-      });
-    }
-    if (this.accordion) {
-      this.eventBus.$on("collapseSelected", (vm) => {
-        if (vm !== this) {
-          this.close();
-        }
-      });
+  watch: {
+    selected(value) {
+      this.activeName = value
+      this.init()
     }
   },
   methods: {
+    init() {
+      if (Array.isArray(this.activeName) && this.activeName.length > 0) {
+        this.activeName.forEach((item) => {
+          this.name === item && this.open();
+        });
+      } else {
+        this.name === this.activeName && this.open();
+      }
+      if (this.accordion) {
+        this.eventBus.$on("collapseSelected", (vm) => {
+          if (vm !== this) {
+            this.close();
+          }
+        });
+      }
+    },
     handleClick() {
       if (this.contentShow) {
         this.close();
@@ -100,7 +103,11 @@ export default {
       }
     },
     close() {
-      if (!this.accordion && this.activeName.length > 0) {
+      if (
+          !this.accordion &&
+          Array.isArray(this.activeName) &&
+          this.activeName.length > 0
+      ) {
         let index = this.activeName.findIndex((item) => {
           return item === this.name;
         });
@@ -113,11 +120,12 @@ export default {
       if (this.accordion) {
         this.changeSelect(this.name);
       } else {
+        Array.isArray(this.activeName) &&
         this.activeName.length > 0 &&
-          this.activeName.every((item) => {
-            return item !== this.name;
-          }) &&
-          this.activeName.push(this.name);
+        this.activeName.every((item) => {
+          return item !== this.name;
+        }) &&
+        this.activeName.push(this.name);
 
         this.changeSelect(this.activeName);
       }
@@ -128,13 +136,15 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "./styles/index";
+
 .zombie-collapse-item {
   border-radius: 8px;
   line-height: 26px;
   box-shadow: rgba(59, 63, 73, 0.15) 1px 3px 9px 0;
   transition: all 0.3s;
+
   .title {
     padding-left: 8px;
     font-size: $font-size-base;
@@ -146,19 +156,24 @@ export default {
     color: $gray-900;
     background-color: #f5f8f9;
     height: 50px;
+
     .icon-tabler-chevron-right {
       stroke: $gray-900;
     }
-    .arrow-wrap{
-      transition: transform .3s;
-      &.open{
+
+    .arrow-wrap {
+      transition: transform 0.3s;
+
+      &.open {
         transform: rotate(90deg);
       }
-      &.close{
+
+      &.close {
         transform: rotate(0deg);
       }
     }
   }
+
   .zombie-collapse-content {
     padding: 8px 4px;
   }

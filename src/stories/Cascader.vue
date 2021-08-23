@@ -50,7 +50,6 @@
 <script>
 import ZCascaderItem from "./CascaderItem";
 import ZInput from "./Input";
-import {mutations} from "./store/cascader"
 export default {
   name: "ZombieCascader",
   components: {
@@ -127,7 +126,11 @@ export default {
   watch:{
     remote:{
       handler(val){
-        mutations.setRemote(val)
+        this.$children.forEach(item=>{
+          if(item.$options.name === 'ZombieCascaderItem'){
+            item.remote = val
+          }
+        })
       },
       immediate:true
     }

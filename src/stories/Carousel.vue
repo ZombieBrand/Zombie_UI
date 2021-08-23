@@ -38,7 +38,6 @@
 </template>
 <script>
 import ZIcon from "./Icon";
-import { mutations } from "./store/carousel";
 
 export default {
   name: "ZombieCarousel",
@@ -48,14 +47,23 @@ export default {
     event: "changeSelect",
   },
   props: {
+    /**
+     * 显示name轮播
+     */
     selected: {
       type: String,
       default: "",
     },
+    /**
+     * 自动轮播
+     */
     autoPlay: {
       type: Boolean,
       default: true,
     },
+    /**
+     * 自动轮播翻页时间
+     */
     autoPlayDelay: {
       type: Number,
       default: 3000,
@@ -166,24 +174,27 @@ export default {
     },
     updateChildren() {
       let selected = this.getSelected();
-      let reverse = this.selectedIndex <= this.lastSelectedIndex;
-      if (this.timerId) {
-        if (
-            this.lastSelectedIndex === this.items.length - 1 &&
-            this.selectedIndex === 0
-        ) {
-          reverse = false;
+      this.items.forEach((vm) => {
+        let reverse =
+            this.selectedIndex <= this.lastSelectedIndex;
+        if (this.timerId) {
+          if (
+              this.lastSelectedIndex === this.items.length - 1 &&
+              this.selectedIndex === 0
+          ) {
+            reverse = false;
+          }
+          if (
+              this.lastSelectedIndex === 0 &&
+              this.selectedIndex === this.items.length - 1
+          ) {
+            reverse = true;
+          }
         }
-        if (
-            this.lastSelectedIndex === 0 &&
-            this.selectedIndex === this.items.length - 1
-        ) {
-          reverse = true;
-        }
-      }
-      mutations.setReverse(reverse)
-      this.$nextTick(() => {
-        mutations.setSelected(selected)
+        vm.reverse = reverse;
+        this.$nextTick(() => {
+          vm.selected = selected;
+        });
       });
     },
   },

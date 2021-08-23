@@ -6,7 +6,6 @@
 
 <script>
 import Vue from "vue";
-import {mutations} from "./store/collapse";
 
 export default {
   name: "ZombieCollapse",
@@ -33,25 +32,39 @@ export default {
   data() {
     return {
       eventBus: new Vue(),
+      collapseItem: [],
     };
   },
-  watch:{
-    selected:{
-      handler(val){
-        mutations.setSelected(val)
+  watch: {
+    selected: {
+      handler(val) {
+        this.getItemsVm().forEach((item) => {
+          item.selected = val;
+        });
       },
-      immediate:true
     },
-    accordion:{
-      handler(val){
-        mutations.setAccordion(val)
+    accordion: {
+      handler(val) {
+        this.getItemsVm().forEach((item) => {
+          item.accordion = val;
+        });
       },
-      immediate:true
     },
+  },
+  mounted() {
+    this.getItemsVm().forEach((item) => {
+      item.selected = this.selected;
+      item.accordion = this.accordion;
+    });
   },
   methods: {
     changeSelect(name) {
       this.$emit("changeSelect", name);
+    },
+    getItemsVm() {
+      return this.$children.filter(
+          (vm) => vm.$options.name === "ZombieCollapseItem"
+      );
     },
   },
   provide() {
@@ -63,5 +76,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style lang="scss" scoped></style>
