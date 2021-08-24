@@ -7,23 +7,40 @@
       <z-menu-item name="home">
         首页
       </z-menu-item>
-      <z-menu-item name="about">
-        关于
-      </z-menu-item>
+      <z-menu-sub>
+        <template #title>
+          关于
+        </template>
+        <z-menu-item name="LivingRoom">
+          客厅
+        </z-menu-item>
+        <z-menu-item name="bedroom">
+          卧室
+        </z-menu-item>
+      </z-menu-sub>
       <z-menu-item name="hire">
         招聘
       </z-menu-item>
     </z-menu>
     <z-menu
       v-model="selected2"
+      style="margin-top:200px"
     >
-      <z-menu-item name="home1">
+      <z-menu-item name="home">
         首页
       </z-menu-item>
-      <z-menu-item name="about1">
-        关于
-      </z-menu-item>
-      <z-menu-item name="hire1">
+      <z-menu-sub>
+        <template #title>
+          关于
+        </template>
+        <z-menu-item name="LivingRoom">
+          客厅
+        </z-menu-item>
+        <z-menu-item name="bedroom">
+          卧室
+        </z-menu-item>
+      </z-menu-sub>
+      <z-menu-item name="hire">
         招聘
       </z-menu-item>
     </z-menu>
@@ -46,8 +63,8 @@ export default {
   },
   data() {
     return {
-      selected: ['home'],
-      selected2: ['about1'],
+      selected: ["home"],
+      selected2: ["about1"],
     };
   },
 };

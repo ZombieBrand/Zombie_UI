@@ -12,6 +12,9 @@
 
 export default {
   name: "ZombieMenuItem",
+  inject:{
+    rootMenu:'rootMenu'
+  },
   props:{
     name:{
       type:String,
@@ -23,9 +26,16 @@ export default {
       selected:''
     }
   },
+  created() {
+    this.rootMenu.changeItem(this)
+  },
+  beforeDestroy() {
+    this.rootMenu.changeItem(this)
+    this.selected && this.$emit('change:selected',this.name)
+  },
   methods:{
     onClickItem(){
-      this.$emit('add:selected',this.name)
+      this.$emit('change:selected',this.name)
     }
   }
 }
@@ -34,6 +44,8 @@ export default {
 <style scoped lang="scss">
   .zombie-menu-item{
     padding: 10px;
+    white-space: nowrap;
+    cursor: pointer;
     &.active{
       background: red;
     }

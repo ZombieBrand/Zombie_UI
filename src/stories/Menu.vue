@@ -8,6 +8,11 @@
 
 export default {
   name: "ZombieMenu",
+  provide() {
+    return {
+      rootMenu: this
+    }
+  },
   model: {
     prop: 'selected',
     event: 'changeSelect'
@@ -23,11 +28,8 @@ export default {
     },
   },
   data() {
-    return {}
-  },
-  computed: {
-    items() {
-      return this.$children.filter(vm => vm.$options.name === "ZombieMenuItem")
+    return {
+      items: []
     }
   },
   mounted() {
@@ -38,25 +40,53 @@ export default {
     this.updateChildren()
   },
   methods: {
+    /**
+     * @description 改变子组件信息
+     * @param vm
+     */
+    changeItem(vm) {
+      let _findIndex = this.items.findIndex(item=>{
+        return item.name === vm.name
+      })
+      if(_findIndex >= 0){
+        this.items.splice(_findIndex,1)
+        this.updateChildren()
+      }else{
+        this.items.push(vm)
+      }
+    },
+    /**
+     * @description 更新子组件selected信息
+     */
     updateChildren() {
       this.items.forEach(vm => {
         vm.selected = this.selected.indexOf(vm.name) >= 0;
       })
     },
-    listenToChildren(){
+    /**
+     * @description 遍历添加监听事件
+     */
+    listenToChildren() {
       this.items.forEach(vm => {
-        vm.$on('add:selected', (name) => {
-          if (this.multiline) {
-            if (this.selected.indexOf(name) < 0) {
-              let copy = JSON.parse(JSON.stringify(this.selected))
-              copy.push(name)
-              this.$emit('changeSelect', copy)
-            }
-          } else {
-            this.$emit('changeSelect', [name])
-          }
-        })
+        vm.$off('change:selected', this.changeSelect)
+        vm.$on('change:selected', this.changeSelect)
       })
+    },
+    /**
+     * @description 根据name通知改变选择的组件
+     * @param name
+     */
+    changeSelect(name) {
+        let _findIndex = this.selected.findIndex( item =>{
+          return item === name
+        })
+        if (_findIndex < 0) {
+          this.selected.push(name)
+          this.multiline ? this.$emit('changeSelect', this.selected) : this.$emit('changeSelect', [name])
+        }else{
+          this.selected.splice(_findIndex,1)
+          this.$emit('changeSelect', this.selected)
+        }
     }
   }
 };
