@@ -43,9 +43,10 @@ export default {
 
 <style scoped lang="scss">
   .zombie-menu-item{
-    padding: 10px;
+    padding:10px 20px;
     white-space: nowrap;
     cursor: pointer;
+    text-align: center;
     &.active{
       background: red;
     }

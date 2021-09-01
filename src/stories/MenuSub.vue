@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     onClick() {
-      this.active=!this.active
-      this.$nextTick(()=>{
+      this.active = !this.active
+      this.$nextTick(() => {
         this.rootMenu.listenToChildren()
       })
     }
@@ -41,16 +41,24 @@ export default {
 .zombie-menu-sub {
   position: relative;
   cursor: pointer;
+
+  &-title {
+    padding: 10px 20px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
   &-popover {
     position: absolute;
     top: 100%;
     left: 0;
     border: 1px solid black;
-    padding: 10px 20px;
   }
 
-  &-title {
-    padding: 10px;
+  .zombie-menu-sub .zombie-menu-sub-popover {
+    position: absolute;
+    top: 0;
+    left: 100%;
   }
 }
 </style>

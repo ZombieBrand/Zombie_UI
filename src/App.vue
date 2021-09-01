@@ -17,6 +17,17 @@
         <z-menu-item name="bedroom">
           卧室
         </z-menu-item>
+        <z-menu-sub>
+          <template #title>
+            测试
+          </template>
+          <z-menu-item name="black">
+            黑盒测
+          </z-menu-item>
+          <z-menu-item name="white">
+            白盒测
+          </z-menu-item>
+        </z-menu-sub>
       </z-menu-sub>
       <z-menu-item name="hire">
         招聘
@@ -43,6 +54,17 @@
       <z-menu-item name="hire">
         招聘
       </z-menu-item>
+      <z-menu-sub>
+        <template #title>
+          测试
+        </template>
+        <z-menu-item name="black">
+          黑盒测
+        </z-menu-item>
+        <z-menu-item name="white">
+          白盒测
+        </z-menu-item>
+      </z-menu-sub>
     </z-menu>
   </div>
 </template>
