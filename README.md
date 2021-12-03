@@ -1,3 +1,5 @@
+![Alt](https://repobeats.axiom.co/api/embed/a29a41089283cd78c9d7795cdde64a910b707af5.svg "Repobeats analytics image")
+
 # zombie-ui 是一个 Vue UI 库
 [![Build Status](https://travis-ci.com/ZombieBrand/Zombie_UI.svg?branch=main)](https://travis-ci.com/ZombieBrand/Zombie_UI)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ZombieBrand/Zombie_UI)
